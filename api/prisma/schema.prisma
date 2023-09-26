@@ -72,7 +72,7 @@ model Transaction {
   categoryId    String?         @map("category_id") @db.Uuid
   name          String
   value         Float
-  float         DateTime
+  date          DateTime
   type          TransactionType
   transactionId String          @db.Uuid
 
