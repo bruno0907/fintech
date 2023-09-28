@@ -6,8 +6,8 @@ import { Prisma } from '@prisma/client';
 export class BankAccountRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  create(createDot: Prisma.BankAccountCreateArgs) {
-    return this.prismaService.bankAccount.create(createDot);
+  create(createDto: Prisma.BankAccountCreateArgs) {
+    return this.prismaService.bankAccount.create(createDto);
   }
 
   findMany(findManyDto: Prisma.BankAccountFindManyArgs) {

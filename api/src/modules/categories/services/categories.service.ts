@@ -12,4 +12,12 @@ export class CategoriesService {
       },
     });
   }
+
+  async findFirst(userId: string) {
+    return await this.categoriesRepository.findFirst({
+      where: {
+        userId,
+      },
+    });
+  }
 }
