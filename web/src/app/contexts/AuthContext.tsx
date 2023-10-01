@@ -3,7 +3,7 @@ import { localStorageKeys } from "../config/localStorageKeys";
 import { MeServiceResponse, userService } from "../../services/user/userService";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import { SplashScreen } from "../../view/components/SplashScreen";
+import { SplashScreen } from "../../views/components/SplashScreen";
 
 interface AuthContextValue {
   signedIn: boolean;

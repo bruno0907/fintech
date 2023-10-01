@@ -1,12 +1,12 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { AuthGuard } from "./AuthGuard";
-import { SignIn } from "../view/pages/SignIn";
-import { SignUp } from "../view/pages/SignUp";
-import { Home } from "../view/pages/Home";
-import { AuthLayout } from "../view/layouts/AuthLayout";
+import { SignIn } from "../views/pages/SignIn";
+import { SignUp } from "../views/pages/SignUp";
+import { Home } from "../views/pages/Home";
+import { AuthLayout } from "../views/layouts/AuthLayout";
 
 
-export function Router() {  
+export function Router() {
   return (
     <BrowserRouter>
       <Routes>
