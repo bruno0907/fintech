@@ -9,12 +9,12 @@ import { IsPublic } from 'src/shared/decorators/IsPublic';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('signin')
+  @Post('sign-in')
   async signin(@Body() signInDto: SignInDto) {
     return await this.authService.signin(signInDto);
   }
 
-  @Post('signup')
+  @Post('sign-up')
   async signup(@Body() signupDto: SignUpDto) {
     return await this.authService.signup(signupDto);
   }
