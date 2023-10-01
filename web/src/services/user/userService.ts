@@ -1,11 +1,15 @@
-import { MeService } from "./meService";
+import { MeService, MeServiceResponse } from "./meService";
 
 class UserService {
   constructor(private readonly meService = new MeService()) {}
 
-  me(accessToken: string) {
-    return this.meService.execute(accessToken);
+  me() {
+    return this.meService.execute();
   }
 }
 
 export const userService = new UserService();
+
+export type {
+  MeServiceResponse
+}

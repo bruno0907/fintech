@@ -1,12 +1,15 @@
 import { createContext, ReactNode, useCallback, useEffect, useState } from "react";
 import { localStorageKeys } from "../config/localStorageKeys";
-import { userService } from "../../services/user/userService";
+import { MeServiceResponse, userService } from "../../services/user/userService";
+import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
+import { SplashScreen } from "../../view/components/SplashScreen";
 
 interface AuthContextValue {
   signedIn: boolean;
   handleSignIn: (accessToken: string) => void;
   handleSignOut: () => void;
+  data: MeServiceResponse | undefined
 }
 
 interface AuthProviderValue {
@@ -21,6 +24,12 @@ export function AuthProvider({ children }: AuthProviderValue) {
     return !!storedToken
   });
 
+  const { isError, data, isFetching, isSuccess, remove } = useQuery({
+    queryKey: ['users', 'me'],
+    queryFn: () => userService.me(),
+    enabled: signedIn
+  })
+
   const handleSignIn = useCallback((accessToken: string) => {
     localStorage.setItem(localStorageKeys.ACCESS_TOKEN, accessToken);
     setSignedIn(true)
@@ -28,33 +37,26 @@ export function AuthProvider({ children }: AuthProviderValue) {
 
   const handleSignOut = useCallback(() => {
     localStorage.removeItem(localStorageKeys.ACCESS_TOKEN)
+    remove()
     setSignedIn(false);
-  }, [])
+  }, [remove])
 
   useEffect(() => {
-    const storedToken = localStorage.getItem(localStorageKeys.ACCESS_TOKEN);
-
-    if(!storedToken) return;
-
-    userService.me(storedToken)
-    .then(() => {
-      setSignedIn(true);
-    })
-    .catch(error => {
-      console.error(error)
+    if(isError) {
+      toast.error('Sessão expirada! Faça seu login novamente.')
       handleSignOut()
-      toast.error('Sessão expirada, faça seu login novamente.')
-    })
-
-  }, [handleSignOut])
+    }
+  }, [isError, handleSignOut])
 
   return (
     <AuthContext.Provider value={{
-      signedIn,
+      signedIn: isSuccess && signedIn,
       handleSignIn,
       handleSignOut,
+      data
     }}>
-      {children}
+      <SplashScreen isLoading={isFetching} />
+      {!isFetching && children}
     </AuthContext.Provider>
   )
 }

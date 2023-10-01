@@ -1,18 +1,16 @@
-import { HttpClient } from "../infra/Httpclient";
+import { httpClientService } from "../httpClientService";
 
-interface MeServiceResponse {
+export interface MeServiceResponse {
   name: string;
   email: string;
 }
 
 export class MeService {
-  constructor(private readonly httpClient = HttpClient) {}
+  constructor(private readonly httpClient = httpClientService) {}
 
-  execute(accessToken: string) {
-    return this.httpClient.get<MeServiceResponse>('users/me', {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`
-      }
-    })
+  async execute() {
+    const { data } = await this.httpClient.get<MeServiceResponse>('users/me');
+
+    return data;
   }
 }

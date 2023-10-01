@@ -1,5 +1,4 @@
-import { HttpClient } from "../infra/Httpclient";
-
+import { httpClientService } from "../httpClientService";
 
 export interface SignInParams {
   email: string;
@@ -11,8 +10,10 @@ interface SignInResponse {
 }
 
 export class SignInService {
+  constructor(private readonly httpClient = httpClientService) {}
+
   async execute(params: SignInParams) {
-    const { data } = await HttpClient.post<SignInResponse>('/auth/sign-in', params);
+    const { data } = await this.httpClient.post<SignInResponse>('/auth/sign-in', params);
     return data;
   }
 }
