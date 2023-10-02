@@ -4,7 +4,7 @@ import { SignIn } from "../views/pages/SignIn";
 import { SignUp } from "../views/pages/SignUp";
 import { Home } from "../views/pages/Home";
 import { AuthLayout } from "../views/layouts/AuthLayout";
-
+import { AppLayout } from "../views/layouts/AppLayout";
 
 export function Router() {
   return (
@@ -18,7 +18,9 @@ export function Router() {
         </Route>
 
         <Route element={<AuthGuard isPrivate />}>
-          <Route path="/" element={<Home />} />
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<Home />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<h1>Not found</h1>} />

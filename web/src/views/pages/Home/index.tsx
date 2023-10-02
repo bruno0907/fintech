@@ -1,13 +1,13 @@
-import { useAuth } from "../../../app/hooks/useAuth";
-import { Button } from "../../components/Button";
+import { BankAccounts } from "./components/BankAccounts";
+import { Transactions } from "./components/Transactions";
 
 export function Home() {
-  const { handleSignOut } = useAuth()
 
   return (
-    <>
-      <h1>Home Page</h1>
-      <Button onClick={handleSignOut}>Sair</Button>
-    </>
+    <main className="flex flex-col lg:flex-row flex-1 gap-4">
+      <BankAccounts />
+
+      <Transactions />
+    </main>
   )
 }
