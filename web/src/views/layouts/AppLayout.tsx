@@ -9,9 +9,7 @@ export function AppLayout() {
         <Logo className="h-6 text-teal-900" />
         <UserMenu />
       </header>
-      <main className="flex flex-col lg:flex-row flex-1 gap-4">
-        <Outlet />
-      </main>
+      <Outlet />
     </div>
   )
 }
