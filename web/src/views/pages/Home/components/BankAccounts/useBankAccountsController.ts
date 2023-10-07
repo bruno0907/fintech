@@ -1,12 +1,15 @@
 import { useCallback, useState } from "react";
 import { SwiperClass } from "swiper/react";
 import { useWindowWidth } from "../../../../../app/hooks/useWindowWidth";
+import { useHome } from "../../hooks/useHome";
 
 export function useBankAccountController() {
   const [sliderState, setSliderState] = useState({
     isBeginning: true,
     isEnd: false,
   })
+
+  const { areValuesVisible, toggleValuesVisibility } = useHome()
 
   const windowWidth = useWindowWidth();
 
@@ -21,5 +24,9 @@ export function useBankAccountController() {
     sliderState,
     handleSlideChange,
     windowWidth,
+    areValuesVisible,
+    toggleValuesVisibility,
+    isLoading: false,
+    accounts: [],
   }
 }

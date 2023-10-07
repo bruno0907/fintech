@@ -1,11 +1,14 @@
 import { useCallback, useState } from "react";
 import { SwiperClass } from "swiper/react";
+import { useHome } from "../../hooks/useHome";
 
 export function useTransactionsController() {
   const [sliderState, setSliderState] = useState({
     isBeginning: true,
     isEnd: false,
   })
+
+  const { areValuesVisible } = useHome();
 
   const handleSlideChange = useCallback((swiper: SwiperClass) => {
     setSliderState({
@@ -17,5 +20,9 @@ export function useTransactionsController() {
   return {
     sliderState,
     handleSlideChange,
+    areValuesVisible,
+    isInitialLoading: false,
+    isLoading: false,
+    transactions: []
   }
 }
