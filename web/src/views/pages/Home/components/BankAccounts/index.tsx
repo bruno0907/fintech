@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { EyeIcon } from "../../../../../assets/icons/EyeIcon";
 import { useBankAccountController } from "./useBankAccountsController";
 import 'swiper/css';
+import { formatCurrency } from "../../../../../app/utils/formatCurrency";
 
 export function BankAccounts() {
   const { sliderState, handleSlideChange, windowWidth } = useBankAccountController()
@@ -13,7 +14,9 @@ export function BankAccounts() {
       <div>
         <span className="text-white block">Saldo total</span>
         <div className="flex gap-2 items-center">
-          <strong className="text-2xl tracking-[-1px] text-white">R$ 1000,00</strong>
+          <strong className="text-2xl tracking-[-1px] text-white">
+            {formatCurrency(15000)}
+          </strong>
           <button className="flex items-center justify-center h-8 w-8">
             <EyeIcon open />
           </button>
