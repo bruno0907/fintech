@@ -13,8 +13,6 @@ export function NewBankAccountModal() {
     handleCloseNewBankAccountModal
   } = useNewBankAccountController();
 
-  console.log({ isNewBankAccountModalOpen });
-
   return (
     <Modal title="Nova Conta" open={isNewBankAccountModalOpen} onClose={handleCloseNewBankAccountModal}>
       <form className='space-y-10'>

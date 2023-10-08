@@ -3,6 +3,7 @@ import { Fab } from './components/Fab';
 import { Transactions } from './components/Transactions';
 import { HomeProvider } from './contexts/HomeContext';
 import { NewBankAccountModal } from './modals/NewAccountModal';
+import { NewTransactionModal } from './modals/NewTransactionModal';
 
 export function Home() {
   return (
@@ -12,6 +13,7 @@ export function Home() {
         <Transactions />
         <Fab />
         <NewBankAccountModal />
+        <NewTransactionModal />
       </main>
     </HomeProvider>
   );

@@ -8,7 +8,10 @@ import { useHome } from '../../hooks/useHome';
 
 export function Fab() {
   const width = useWindowWidth();
-  const { handleOpenNewBankAccountModal } = useHome();
+  const {
+    handleOpenNewBankAccountModal,
+    handleOpenNewTransactionModal
+  } = useHome();
 
   return (
     <div className={cn(
@@ -22,11 +25,11 @@ export function Fab() {
           </button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content side="top" align="end">
-          <DropdownMenu.Item>
+          <DropdownMenu.Item onSelect={() => handleOpenNewTransactionModal('EXPENSE')}>
             <CategoryIcon type="expense" />
             <span>Nova Despesa</span>
           </DropdownMenu.Item>
-          <DropdownMenu.Item>
+          <DropdownMenu.Item onSelect={() => handleOpenNewTransactionModal('INCOME')}>
             <CategoryIcon type="income" />
             <span>Nova Receita</span>
           </DropdownMenu.Item>
