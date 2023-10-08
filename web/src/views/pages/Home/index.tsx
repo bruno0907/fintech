@@ -1,3 +1,4 @@
+import { Modal } from "../../components/Modal.tsx";
 import { BankAccounts } from "./components/BankAccounts";
 import { Fab } from "./components/Fab";
 import { Transactions } from "./components/Transactions";
@@ -10,6 +11,9 @@ export function Home() {
           <BankAccounts />
           <Transactions />
           <Fab />
+          <Modal open={true} title="Modal">
+            <h1>Content</h1>
+          </Modal>
       </main>
     </HomeProvider>
   )
