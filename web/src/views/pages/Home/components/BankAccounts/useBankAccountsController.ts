@@ -1,15 +1,19 @@
-import { useCallback, useState } from "react";
-import { SwiperClass } from "swiper/react";
-import { useWindowWidth } from "../../../../../app/hooks/useWindowWidth";
-import { useHome } from "../../hooks/useHome";
+import { useCallback, useState } from 'react';
+import { SwiperClass } from 'swiper/react';
+import { useWindowWidth } from '../../../../../app/hooks/useWindowWidth';
+import { useHome } from '../../hooks/useHome';
 
 export function useBankAccountController() {
   const [sliderState, setSliderState] = useState({
     isBeginning: true,
     isEnd: false,
-  })
+  });
 
-  const { areValuesVisible, toggleValuesVisibility } = useHome()
+  const {
+    areValuesVisible,
+    toggleValuesVisibility,
+    handleOpenNewBankAccountModal
+  } = useHome();
 
   const windowWidth = useWindowWidth();
 
@@ -17,8 +21,8 @@ export function useBankAccountController() {
     setSliderState({
       isBeginning: swiper.isBeginning,
       isEnd: swiper.isEnd
-    })
-  }, [])
+    });
+  }, []);
 
   return {
     sliderState,
@@ -28,5 +32,6 @@ export function useBankAccountController() {
     toggleValuesVisibility,
     isLoading: false,
     accounts: [{}],
-  }
+    handleOpenNewBankAccountModal,
+  };
 }

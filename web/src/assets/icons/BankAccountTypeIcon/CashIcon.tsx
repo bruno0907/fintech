@@ -12,5 +12,5 @@ export function CashIcon({ className }: IconProps) {
       <path fillRule="evenodd" clipRule="evenodd" d="M24.2868 22.0003C24.2868 20.7365 23.2623 19.7129 21.9994 19.7129C20.7355 19.7129 19.7109 20.7365 19.7109 22.0003C19.7109 23.2642 20.7355 24.2878 21.9994 24.2878C23.2623 24.2878 24.2868 23.2642 24.2868 22.0003Z" stroke="#495057" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <rect x="1" y="1" width="42" height="42" rx="21" stroke="white" strokeWidth="2"/>
     </svg>
-  )
+  );
 }

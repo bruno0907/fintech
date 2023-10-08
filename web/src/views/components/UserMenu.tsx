@@ -1,17 +1,17 @@
 
-import { useAuth } from "../../app/hooks/useAuth"
-import { ExitIcon, PersonIcon } from '@radix-ui/react-icons'
-import { DropdownMenu } from "./DropdownMenu";
+import { useAuth } from '../../app/hooks/useAuth';
+import { ExitIcon, PersonIcon } from '@radix-ui/react-icons';
+import { DropdownMenu } from './DropdownMenu';
 import * as Avatar from '@radix-ui/react-avatar';
 
 export function UserMenu() {
-  const { data, handleSignOut } = useAuth()
+  const { data, handleSignOut } = useAuth();
 
   if(!data) return;
 
-  const fullName = data.name.split(' ')
-  const firstName = fullName[0]
-  const lastName = fullName[fullName.length - 1]
+  const fullName = data.name.split(' ');
+  const firstName = fullName[0];
+  const lastName = fullName[fullName.length - 1];
 
   return (
     <DropdownMenu.Root>
@@ -33,5 +33,5 @@ export function UserMenu() {
         </DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
-  )
+  );
 }

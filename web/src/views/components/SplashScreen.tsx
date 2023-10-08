@@ -1,6 +1,6 @@
-import { Transition } from '@headlessui/react'
-import { Logo } from "./Logo";
-import { Spinner } from "./Spinner";
+import { Transition } from '@headlessui/react';
+import { Logo } from './Logo';
+import { Spinner } from './Spinner';
 
 interface SplashScreenProps {
   isLoading: boolean;
@@ -22,5 +22,5 @@ export function SplashScreen({ isLoading }: SplashScreenProps) {
         <Spinner className="h-6 text-teal-900 fill-white" />
       </div>
     </Transition>
-  )
+  );
 }

@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
-import { useSignInController } from "./useSignInController";
+import { Link } from 'react-router-dom';
+import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
+import { useSignInController } from './useSignInController';
 
 export function SignIn() {
-  const { handleSubmit, isLoading, register, errors } = useSignInController()
+  const { handleSubmit, isLoading, register, errors } = useSignInController();
 
   return (
     <div className="flex flex-col items-center gap-11">
@@ -35,6 +35,6 @@ export function SignIn() {
         <Button type="submit" isLoading={isLoading}>Entrar</Button>
       </form>
     </div>
-  )
+  );
 }
 

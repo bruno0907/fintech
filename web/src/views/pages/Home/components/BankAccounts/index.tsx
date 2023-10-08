@@ -1,13 +1,13 @@
-import { AccountCard } from "./AccountCard";
-import { SliderNav } from "./SliderNav";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EyeIcon } from "../../../../../assets/icons/EyeIcon";
-import { useBankAccountController } from "./useBankAccountsController";
-import { formatCurrency } from "../../../../../app/utils/formatCurrency";
-import { cn } from "../../../../../app/utils/cn";
+import { AccountCard } from './AccountCard';
+import { SliderNav } from './SliderNav';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EyeIcon } from '../../../../../assets/icons/EyeIcon';
+import { useBankAccountController } from './useBankAccountsController';
+import { formatCurrency } from '../../../../../app/utils/formatCurrency';
+import { cn } from '../../../../../app/utils/cn';
 import 'swiper/css';
-import { Spinner } from "../../../../components/Spinner";
-import { PlusIcon } from "@radix-ui/react-icons";
+import { Spinner } from '../../../../components/Spinner';
+import { PlusIcon } from '@radix-ui/react-icons';
 
 export function BankAccounts() {
   const {
@@ -17,8 +17,9 @@ export function BankAccounts() {
     areValuesVisible,
     toggleValuesVisibility,
     isLoading,
-    accounts
-  } = useBankAccountController()
+    accounts,
+    handleOpenNewBankAccountModal
+  } = useBankAccountController();
 
 
   return (
@@ -34,8 +35,8 @@ export function BankAccounts() {
             <span className="text-white block">Saldo total</span>
             <div className="flex gap-2 items-center">
               <strong className={cn(
-                "text-2xl tracking-[-1px] text-white transition-all",
-                !areValuesVisible && "blur-sm"
+                'text-2xl tracking-[-1px] text-white transition-all',
+                !areValuesVisible && 'blur-sm'
               )}>
                 {formatCurrency(15000)}
               </strong>
@@ -57,7 +58,10 @@ export function BankAccounts() {
                   </strong>
                 </div>
 
-                <button className="w-full flex flex-col flex-1 items-center justify-center gap-4 rounded-2xl border-2 border-teal-600 border-dashed p-4 h-52">
+                <button
+                  className="w-full flex flex-col flex-1 items-center justify-center gap-4 rounded-2xl border-2 border-teal-600 border-dashed p-4 h-52"
+                  onClick={handleOpenNewBankAccountModal}
+                >
                   <div className="p-3 rounded-full border-2 border-white border-dashed">
                     <PlusIcon className="w-6 h-6 text-white flex-shrink-0" />
                   </div>
@@ -109,5 +113,5 @@ export function BankAccounts() {
         </>
       )}
     </section>
-  )
+  );
 }

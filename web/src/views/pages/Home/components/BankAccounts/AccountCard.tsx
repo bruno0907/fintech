@@ -1,7 +1,7 @@
-import { cn } from "../../../../../app/utils/cn";
-import { formatCurrency } from "../../../../../app/utils/formatCurrency";
-import { BankAccountTypeIcon } from "../../../../../assets/icons/BankAccountTypeIcon";
-import { useBankAccountController } from "./useBankAccountsController";
+import { cn } from '../../../../../app/utils/cn';
+import { formatCurrency } from '../../../../../app/utils/formatCurrency';
+import { BankAccountTypeIcon } from '../../../../../assets/icons/BankAccountTypeIcon';
+import { useBankAccountController } from './useBankAccountsController';
 
 interface AccountCardProps {
   color: string;
@@ -26,13 +26,13 @@ export function AccountCard({ color, name, balance, type }: AccountCardProps) {
       <div>
         <span
           className={cn(
-            "text-gray-800 font-medium tracking-[-0.5px] block transition-all",
-            !areValuesVisible && "blur-sm"
+            'text-gray-800 font-medium tracking-[-0.5px] block transition-all',
+            !areValuesVisible && 'blur-sm'
           )}>
-            {formatCurrency(balance)}
-          </span>
+          {formatCurrency(balance)}
+        </span>
         <small className="text-gray-600 text-sm">Saldo atual</small>
       </div>
     </div>
-  )
+  );
 }

@@ -37,5 +37,5 @@ export function Logo({ className }: LogoProps) {
         fill="currentColor"
       />
     </svg>
-  )
+  );
 }

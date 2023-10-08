@@ -1,8 +1,8 @@
-import { Button } from "../../../../../components/Button";
-import { Modal } from "../../../../../components/Modal";
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { cn } from "../../../../../../app/utils/cn";
-import { useFiltersModal } from "./useFiltersModal";
+import { Button } from '../../../../../components/Button';
+import { Modal } from '../../../../../components/Modal';
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { cn } from '../../../../../../app/utils/cn';
+import { useFiltersModal } from './useFiltersModal';
 
 
 interface Props {
@@ -14,7 +14,7 @@ const mockedBankAccounts = [
   { id: '1', name: 'Nubank' },
   { id: '2', name: 'Inter' },
   { id: '3', name: 'Dinheiro' },
-]
+];
 
 export function FiltersModal({ onClose, open }: Props) {
   const {
@@ -39,15 +39,15 @@ export function FiltersModal({ onClose, open }: Props) {
                 <li key={bankAccount.id}>
                   <button
                     className={cn(
-                      "p-2 rounded-2xl w-full hover:bg-gray-100 text-gray-800",
-                      selectedBankAccountId === bankAccount.id && "bg-gray-200"
+                      'p-2 rounded-2xl w-full hover:bg-gray-100 text-gray-800',
+                      selectedBankAccountId === bankAccount.id && 'bg-gray-200'
                     )}
                     onClick={() => handleSelecteBankAccountId(bankAccount.id)}
                   >
                     {bankAccount.name}
                   </button>
                 </li>
-              )
+              );
             })}
           </ul>
         </div>
@@ -80,5 +80,5 @@ export function FiltersModal({ onClose, open }: Props) {
         </Button>
       </div>
     </Modal>
-  )
+  );
 }

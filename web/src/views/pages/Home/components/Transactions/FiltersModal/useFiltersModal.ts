@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react';
 
 export function useFiltersModal() {
   const [selectedBankAccountId, setSelectedBankAccountId] = useState<null | string>(null);
@@ -11,7 +11,7 @@ export function useFiltersModal() {
   }
 
   function handleSelectYear(step: number) {
-    setSelectedYear(prevState => prevState + step)
+    setSelectedYear(prevState => prevState + step);
   }
 
   return {
@@ -19,5 +19,5 @@ export function useFiltersModal() {
     handleSelecteBankAccountId,
     selectedYear,
     handleSelectYear
-  }
+  };
 }

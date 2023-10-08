@@ -1,15 +1,15 @@
-import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
-import { TransactionsIcon } from "../../../../../assets/icons/TransactionsIcon";
-import { DropdownMenu } from "../../../../components/DropdownMenu";
-import { IncomeIcon } from "../../../../../assets/icons/IncomeIcon";
-import { ExpensesIcon } from "../../../../../assets/icons/ExpensesIcon";
-import { useState } from "react";
+import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
+import { TransactionsIcon } from '../../../../../assets/icons/TransactionsIcon';
+import { DropdownMenu } from '../../../../components/DropdownMenu';
+import { IncomeIcon } from '../../../../../assets/icons/IncomeIcon';
+import { ExpensesIcon } from '../../../../../assets/icons/ExpensesIcon';
+import { useState } from 'react';
 
 export function TransactionTypeDropdown() {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleIsOpen() {
-    setIsOpen(prevState => !prevState)
+    setIsOpen(prevState => !prevState);
   }
   return (
     <DropdownMenu.Root open={isOpen} onOpenChange={handleIsOpen}>
@@ -36,5 +36,5 @@ export function TransactionTypeDropdown() {
         </DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
-  )
+  );
 }

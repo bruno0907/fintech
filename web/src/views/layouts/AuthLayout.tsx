@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 
-import Hero from '../../assets/images/hero.png'
-import { Logo } from "../components/Logo";
+import Hero from '../../assets/images/hero.png';
+import { Logo } from '../components/Logo';
 
 export function AuthLayout() {
   return (
@@ -30,5 +30,5 @@ export function AuthLayout() {
         </div>
       </div>
     </div>
-  )
+  );
 }

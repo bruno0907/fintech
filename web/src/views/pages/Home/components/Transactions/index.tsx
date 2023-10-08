@@ -1,18 +1,18 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { MONTH } from "../../../../../app/config/constants";
-import { SliderOption } from "./SliderOption";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { MONTH } from '../../../../../app/config/constants';
+import { SliderOption } from './SliderOption';
 import 'swiper/css';
-import { useTransactionsController } from "./useTransactionsController";
-import { SliderNav } from "./SliderNav";
-import { formatCurrency } from "../../../../../app/utils/formatCurrency";
-import { CategoryIcon } from "../../../../../assets/icons/categories/CategoryIcon";
-import { cn } from "../../../../../app/utils/cn";
-import { Spinner } from "../../../../components/Spinner";
-import EmptyState from '../../../../../assets/images/emptyState.svg'
-import { TransactionTypeDropdown } from "./TransactionTypeDropdown";
-import { FilterIcon } from "../../../../../assets/icons/FilterIcon";
-import { ScrollArea } from "../../../../components/ScrollArea";
-import { FiltersModal } from "./FiltersModal";
+import { useTransactionsController } from './useTransactionsController';
+import { SliderNav } from './SliderNav';
+import { formatCurrency } from '../../../../../app/utils/formatCurrency';
+import { CategoryIcon } from '../../../../../assets/icons/categories/CategoryIcon';
+import { cn } from '../../../../../app/utils/cn';
+import { Spinner } from '../../../../components/Spinner';
+import EmptyState from '../../../../../assets/images/emptyState.svg';
+import { TransactionTypeDropdown } from './TransactionTypeDropdown';
+import { FilterIcon } from '../../../../../assets/icons/FilterIcon';
+import { ScrollArea } from '../../../../components/ScrollArea';
+import { FiltersModal } from './FiltersModal';
 
 export function Transactions() {
   const {
@@ -98,7 +98,7 @@ export function Transactions() {
             <ScrollArea>
               <ul className="flex flex-col gap-2 px-4">
                 {Array.from({ length: 20 }).map((_, i) => {
-                  const type = i % 2 === 0 ? 'expense' : 'income'
+                  const type = i % 2 === 0 ? 'expense' : 'income';
                   return (
                     <li key={i} className="flex align-center bg-white rounded-2xl p-4 gap-3">
                       <CategoryIcon type={type} />
@@ -107,14 +107,14 @@ export function Transactions() {
                         <span className="text-sm text-gray-600 leading-none">04/06/2023</span>
                       </div>
                       <span className={cn(
-                        "my-auto font-medium tracking-[-0.5px] transition-all",
+                        'my-auto font-medium tracking-[-0.5px] transition-all',
                         type === 'expense' ? 'text-red-800' : 'text-green-800',
-                        !areValuesVisible && "blur-sm"
+                        !areValuesVisible && 'blur-sm'
                       )}>
                         {`${type === 'expense' ? '-' : ''} ${formatCurrency(1000)}`}
                       </span>
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </ScrollArea>
@@ -123,5 +123,5 @@ export function Transactions() {
         </>
       )}
     </section>
-  )
+  );
 }

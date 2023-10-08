@@ -11,4 +11,4 @@ export const MONTH = [
   'Out',
   'Nov',
   'Dez',
-]
+];

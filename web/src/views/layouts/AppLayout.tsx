@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
-import { Logo } from "../components/Logo";
-import { UserMenu } from "../components/UserMenu";
+import { Outlet } from 'react-router-dom';
+import { Logo } from '../components/Logo';
+import { UserMenu } from '../components/UserMenu';
 
 export function AppLayout() {
   return (
@@ -11,5 +11,5 @@ export function AppLayout() {
       </header>
       <Outlet />
     </div>
-  )
+  );
 }

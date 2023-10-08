@@ -17,5 +17,5 @@ export function InvestmentIcon({ className }: IconProps) {
       <path d="M28.48 15.3941V12.9941" stroke="#495057" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <rect x="1" y="1" width="42" height="42" rx="21" stroke="white" strokeWidth="2"/>
     </svg>
-  )
+  );
 }

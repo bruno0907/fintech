@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import { Button } from "../../components/Button";
-import { Input } from "../../components/Input";
-import { useSignUpController } from "./useSignUpController";
+import { Link } from 'react-router-dom';
+import { Button } from '../../components/Button';
+import { Input } from '../../components/Input';
+import { useSignUpController } from './useSignUpController';
 
 export function SignUp() {
   const { handleSubmit, register, isLoading, errors } = useSignUpController();
@@ -18,10 +18,10 @@ export function SignUp() {
 
       <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
         <Input
-        type="text"
-        placeholder="Nome completo"
-        hasError={errors.name}
-        {...register('name')}
+          type="text"
+          placeholder="Nome completo"
+          hasError={errors.name}
+          {...register('name')}
         />
         <Input
           type="email"
@@ -38,5 +38,5 @@ export function SignUp() {
         <Button type="submit" isLoading={isLoading}>Criar conta</Button>
       </form>
     </div>
-  )
+  );
 }

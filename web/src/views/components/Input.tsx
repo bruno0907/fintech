@@ -1,8 +1,8 @@
-import { ComponentProps, forwardRef } from "react";
+import { ComponentProps, forwardRef } from 'react';
 import { FieldError } from 'react-hook-form';
 
-import { CrossCircledIcon } from '@radix-ui/react-icons'
-import { cn } from "../../app/utils/cn";
+import { CrossCircledIcon } from '@radix-ui/react-icons';
+import { cn } from '../../app/utils/cn';
 
 interface InputProps extends ComponentProps<'input'> {
   name: string
@@ -18,7 +18,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ id, name, place
         id={inputId}
         name={name}
         className={cn(
-          "bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] tex-gray-800 pt-4 placeholder-shown:pt-0 peer placeholder:invisible transition-all",
+          'bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] tex-gray-800 pt-4 placeholder-shown:pt-0 peer placeholder:invisible transition-all',
           hasError && 'border-red-900'
         )}
         placeholder={placeholder}
@@ -36,5 +36,5 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ id, name, place
         </p>
       )}
     </div>
-  )
-})
+  );
+});

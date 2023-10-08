@@ -1,10 +1,10 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { AuthGuard } from "./AuthGuard";
-import { SignIn } from "../views/pages/SignIn";
-import { SignUp } from "../views/pages/SignUp";
-import { Home } from "../views/pages/Home";
-import { AuthLayout } from "../views/layouts/AuthLayout";
-import { AppLayout } from "../views/layouts/AppLayout";
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { AuthGuard } from './AuthGuard';
+import { SignIn } from '../views/pages/SignIn';
+import { SignUp } from '../views/pages/SignUp';
+import { Home } from '../views/pages/Home';
+import { AuthLayout } from '../views/layouts/AuthLayout';
+import { AppLayout } from '../views/layouts/AppLayout';
 
 export function Router() {
   return (
@@ -26,5 +26,5 @@ export function Router() {
         <Route path="*" element={<h1>Not found</h1>} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }

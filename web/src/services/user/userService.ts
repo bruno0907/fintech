@@ -1,4 +1,4 @@
-import { MeService, MeServiceResponse } from "./meService";
+import { MeService, MeServiceResponse } from './meService';
 
 class UserService {
   constructor(private readonly meService = new MeService()) {}
@@ -12,4 +12,4 @@ export const userService = new UserService();
 
 export type {
   MeServiceResponse
-}
+};

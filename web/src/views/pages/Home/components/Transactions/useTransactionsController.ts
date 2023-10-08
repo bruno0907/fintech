@@ -1,14 +1,14 @@
-import { useCallback, useState } from "react";
-import { SwiperClass } from "swiper/react";
-import { useHome } from "../../hooks/useHome";
+import { useCallback, useState } from 'react';
+import { SwiperClass } from 'swiper/react';
+import { useHome } from '../../hooks/useHome';
 
 export function useTransactionsController() {
   const [sliderState, setSliderState] = useState({
     isBeginning: true,
     isEnd: false,
-  })
+  });
 
-  const [isFiltersModalOpen, setFiltersIsModalOpen] = useState(true);
+  const [isFiltersModalOpen, setFiltersIsModalOpen] = useState(false);
 
   const { areValuesVisible } = useHome();
 
@@ -16,15 +16,15 @@ export function useTransactionsController() {
     setSliderState({
       isBeginning: swiper.isBeginning,
       isEnd: swiper.isEnd
-    })
-  }, [])
+    });
+  }, []);
 
   function handleOpenFiltersModal() {
-    setFiltersIsModalOpen(true)
+    setFiltersIsModalOpen(true);
   }
 
   function handleCloseFiltersModal() {
-    setFiltersIsModalOpen(false)
+    setFiltersIsModalOpen(false);
   }
 
   return {
@@ -37,5 +37,5 @@ export function useTransactionsController() {
     isFiltersModalOpen,
     handleOpenFiltersModal,
     handleCloseFiltersModal
-  }
+  };
 }

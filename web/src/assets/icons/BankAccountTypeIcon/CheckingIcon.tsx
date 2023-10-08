@@ -11,5 +11,5 @@ export function CheckingIcon({ className }: IconProps) {
       <path d="M16.1768 24.1699H19.1453" stroke="#495057" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       <rect x="1" y="1" width="40" height="40" rx="20" stroke="white" strokeWidth="2"/>
     </svg>
-  )
+  );
 }

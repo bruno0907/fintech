@@ -1,5 +1,5 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { useSwiper } from "swiper/react";
+import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { useSwiper } from 'swiper/react';
 
 interface SliderNavProps {
   isBeginning: boolean;
@@ -7,7 +7,7 @@ interface SliderNavProps {
 }
 
 export function SliderNav({ isBeginning, isEnd }: SliderNavProps) {
-  const swiper = useSwiper()
+  const swiper = useSwiper();
 
   return (
     <div className="flex items-center justify-between mb-4">
@@ -31,5 +31,5 @@ export function SliderNav({ isBeginning, isEnd }: SliderNavProps) {
         </button>
       </div>
     </div>
-  )
+  );
 }

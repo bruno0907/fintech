@@ -1,5 +1,5 @@
-import { SignInParams, SignInService } from "./signInService";
-import { SignUpParams, SignUpService } from "./signUpService";
+import { SignInParams, SignInService } from './signInService';
+import { SignUpParams, SignUpService } from './signUpService';
 
 class AuthService {
   constructor(
@@ -8,11 +8,11 @@ class AuthService {
   ) {}
 
   signUp(params: SignUpParams) {
-    return this.signUpService.execute(params)
+    return this.signUpService.execute(params);
   }
 
   signIn(params: SignInParams) {
-    return this.signInService.execute(params)
+    return this.signInService.execute(params);
   }
 }
 

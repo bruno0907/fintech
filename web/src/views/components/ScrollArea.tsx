@@ -9,7 +9,7 @@ interface ScrollAreaProps {
 
 export function ScrollArea({ children, className }: ScrollAreaProps) {
   return (
-    <RadixScrollArea.Root className={cn("flex-1 py-2 lg:overflow-hidden", className)}>
+    <RadixScrollArea.Root className={cn('flex-1 py-2 lg:overflow-hidden', className)}>
       <RadixScrollArea.Viewport className="w-full h-full">
         {children}
       </RadixScrollArea.Viewport>
@@ -27,5 +27,5 @@ export function ScrollArea({ children, className }: ScrollAreaProps) {
       </RadixScrollArea.Scrollbar>
       <RadixScrollArea.Corner className="bg-gray-900" />
     </RadixScrollArea.Root>
-  )
+  );
 }

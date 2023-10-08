@@ -1,4 +1,4 @@
-import { cn } from "../../app/utils/cn";
+import { cn } from '../../app/utils/cn';
 
 interface SpinnerProps {
   className?: string;
@@ -10,7 +10,7 @@ export function Spinner({ className }: SpinnerProps) {
       <svg
         aria-hidden="true"
         className={cn(
-          "w-8 h-8 mr-2 text-gray-300 animate-spin fill-teal-900",
+          'w-8 h-8 mr-2 text-gray-300 animate-spin fill-teal-900',
           className
         )}
         viewBox="0 0 100 101"
@@ -22,5 +22,5 @@ export function Spinner({ className }: SpinnerProps) {
       </svg>
       <span className="sr-only">Loading...</span>
     </>
-  )
+  );
 }
