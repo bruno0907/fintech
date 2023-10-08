@@ -7,9 +7,9 @@ interface DropdownMenuDefaultProps {
   className?: string;
 }
 
-function Root({ children }: { children: ReactNode }) {
+function Root({ children, ...rest }: DropdownMenuDefaultProps & RadixDropdownMenu.DropdownMenuProps) {
   return (
-    <RadixDropdownMenu.Root>
+    <RadixDropdownMenu.Root {...rest}>
       {children}
     </RadixDropdownMenu.Root>
   )

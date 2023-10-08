@@ -27,6 +27,6 @@ export function useBankAccountController() {
     areValuesVisible,
     toggleValuesVisibility,
     isLoading: false,
-    accounts: [],
+    accounts: [{}],
   }
 }

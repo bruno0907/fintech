@@ -10,6 +10,8 @@ import { cn } from "../../../../../app/utils/cn";
 import { Spinner } from "../../../../components/Spinner";
 import EmptyState from '../../../../../assets/images/emptyState.svg'
 import { TransactionTypeDropdown } from "./TransactionTypeDropdown";
+import { FilterIcon } from "../../../../../assets/icons/FilterIcon";
+import { ScrollArea } from "../../../../components/ScrollArea";
 
 export function Transactions() {
   const {
@@ -24,7 +26,7 @@ export function Transactions() {
   const hasTransactions = transactions.length > 0;
 
   return (
-    <section className="flex flex-col flex-1 gap-2 bg-gray-100 rounded-2xl px-4 py-8 md:p-10 lg:w-1/2">
+    <section className="flex flex-col flex-1 gap-2 bg-gray-100 rounded-2xl px-4 py-8 md:p-10 lg:w-1/2 lg:overflow-auto">
       {isInitialLoading && (
         <div className="w-full flex-1 flex items-center justify-center">
           <Spinner className="text-gray-100 fill-teal-900" />
@@ -34,32 +36,40 @@ export function Transactions() {
       {!isInitialLoading && (
         <>
           <header className="flex flex-col gap-6 max-w-full">
-            <TransactionTypeDropdown />
+            <div className="flex items-center justify-between">
+              <TransactionTypeDropdown />
+              <button>
+                <FilterIcon />
+              </button>
+            </div>
 
             <div className="relative">
               <SliderNav
                 isBeginning={sliderState.isBeginning}
                 isEnd={sliderState.isEnd}
               />
-              <Swiper
-                spaceBetween={20}
-                slidesPerView={3}
-                centeredSlides
-                onSlideChange={handleSlideChange}
-              >
-                {MONTH.map((month, index) => (
-                  <SwiperSlide key={month}>
-                    {({ isActive }) => (
-                      <SliderOption
-                        isActive={isActive}
-                        month={month}
-                        index={index}
-                      />
-                    )}
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-
+              <div slot="container-start">
+                <Swiper
+                  spaceBetween={20}
+                  slidesPerView={3}
+                  centeredSlides
+                  onSlideChange={handleSlideChange}
+                >
+                  {MONTH.map((month, index) => (
+                    <SwiperSlide key={month}>
+                      {({ isActive }) => (
+                        <div className="select-none">
+                          <SliderOption
+                            isActive={isActive}
+                            month={month}
+                            index={index}
+                          />
+                        </div>
+                      )}
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
             </div>
           </header>
 
@@ -76,8 +86,8 @@ export function Transactions() {
           )}
 
           {(hasTransactions && !isLoading) && (
-            <div className="flex-1 py-2 overflow-y-auto">
-              <ul className="flex flex-col gap-2">
+            <ScrollArea>
+              <ul className="flex flex-col gap-2 px-4">
                 {Array.from({ length: 20 }).map((_, i) => {
                   const type = i % 2 === 0 ? 'expense' : 'income'
                   return (
@@ -98,7 +108,7 @@ export function Transactions() {
                   )
                 })}
               </ul>
-            </div>
+            </ScrollArea>
           )}
 
         </>

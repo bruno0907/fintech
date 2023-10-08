@@ -2,6 +2,7 @@
 import { useAuth } from "../../app/hooks/useAuth"
 import { ExitIcon, PersonIcon } from '@radix-ui/react-icons'
 import { DropdownMenu } from "./DropdownMenu";
+import * as Avatar from '@radix-ui/react-avatar';
 
 export function UserMenu() {
   const { data, handleSignOut } = useAuth()
@@ -15,11 +16,11 @@ export function UserMenu() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
-        <div className="p-3 bg-teal-0 rounded-full">
-          <span className="text-teal-900 font-medium text-sm tracking-[-0.5px]">
+        <Avatar.Root className="w-12 h-12 flex items-center justify-center bg-teal-0 rounded-full">
+          <Avatar.Fallback className="text-teal-900 font-medium text-sm tracking-[-0.5px]">
             {firstName[0]}{lastName[0]}
-          </span>
-        </div>
+          </Avatar.Fallback>
+        </Avatar.Root>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content side="left" align="start">
         <DropdownMenu.Item onSelect={() => console.log('Abriu perfil')}>
