@@ -1,6 +1,3 @@
-import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { TransactionsIcon } from "../../../../../assets/icons/TransactionsIcon";
-import { FilterIcon } from "../../../../../assets/icons/FilterIcon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { MONTH } from "../../../../../app/config/constants";
 import { SliderOption } from "./SliderOption";
@@ -12,6 +9,7 @@ import { CategoryIcon } from "../../../../../assets/icons/categories/CategoryIco
 import { cn } from "../../../../../app/utils/cn";
 import { Spinner } from "../../../../components/Spinner";
 import EmptyState from '../../../../../assets/images/emptyState.svg'
+import { TransactionTypeDropdown } from "./TransactionTypeDropdown";
 
 export function Transactions() {
   const {
@@ -36,16 +34,7 @@ export function Transactions() {
       {!isInitialLoading && (
         <>
           <header className="flex flex-col gap-6 max-w-full">
-            <div className="flex items-center justify-between">
-              <button className="flex items-center gap-2">
-                <TransactionsIcon />
-                <span className="text-sm text-gray-800 tracking-[-0.5px] font-medium">Transações</span>
-                <ChevronDownIcon className="text-gray-900" />
-              </button>
-              <button>
-                <FilterIcon />
-              </button>
-            </div>
+            <TransactionTypeDropdown />
 
             <div className="relative">
               <SliderNav
