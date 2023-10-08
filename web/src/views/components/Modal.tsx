@@ -8,11 +8,12 @@ interface Props {
   children: ReactNode;
   title: string;
   rightAction?: ReactNode;
+  onClose?: () => void;
 }
 
-export function Modal({ open, title, rightAction, children }: Props) {
+export function Modal({ open, title, rightAction, onClose, children }: Props) {
   return (
-    <Dialog.Root open={open}>
+    <Dialog.Root open={open} onOpenChange={onClose}>
       <Dialog.Portal>
         <Dialog.Overlay
           className={cn(
@@ -27,13 +28,16 @@ export function Modal({ open, title, rightAction, children }: Props) {
           )}
         >
           <header className="h-12 flex items-center justify-between text-gray-800">
-            <button className="w-12 h-12">
+            <button
+              className="w-12 h-12 flex items-center justify-center outline-none"
+              onClick={onClose}
+            >
               <Cross2Icon className="h-6 w-6" />
             </button>
 
             <span className="text-lg tracking-[-1px] font-bold">{title}</span>
 
-            <div className="w-12 h-12 flex items-center justify-center">
+            <div className="w-12 h-12 flex items-center justify-center outline-none">
               {rightAction}
             </div>
           </header>

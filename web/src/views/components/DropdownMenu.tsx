@@ -17,7 +17,7 @@ function Root({ children, ...rest }: DropdownMenuDefaultProps & RadixDropdownMen
 
 function Trigger({ children }: { children: ReactNode }) {
   return (
-    <RadixDropdownMenu.Trigger className='outline-none select-none'>
+    <RadixDropdownMenu.Trigger className='outline-none select-none' asChild>
       {children}
     </RadixDropdownMenu.Trigger>
   )

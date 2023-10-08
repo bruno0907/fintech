@@ -12,6 +12,7 @@ import EmptyState from '../../../../../assets/images/emptyState.svg'
 import { TransactionTypeDropdown } from "./TransactionTypeDropdown";
 import { FilterIcon } from "../../../../../assets/icons/FilterIcon";
 import { ScrollArea } from "../../../../components/ScrollArea";
+import { FiltersModal } from "./FiltersModal";
 
 export function Transactions() {
   const {
@@ -20,7 +21,10 @@ export function Transactions() {
     areValuesVisible,
     isInitialLoading,
     isLoading,
-    transactions
+    transactions,
+    isFiltersModalOpen,
+    handleOpenFiltersModal,
+    handleCloseFiltersModal
   } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
@@ -38,10 +42,15 @@ export function Transactions() {
           <header className="flex flex-col gap-6 max-w-full">
             <div className="flex items-center justify-between">
               <TransactionTypeDropdown />
-              <button>
+              <button onClick={handleOpenFiltersModal}>
                 <FilterIcon />
               </button>
             </div>
+
+            <FiltersModal
+              onClose={handleCloseFiltersModal}
+              open={isFiltersModalOpen}
+            />
 
             <div className="relative">
               <SliderNav

@@ -8,6 +8,8 @@ export function useTransactionsController() {
     isEnd: false,
   })
 
+  const [isFiltersModalOpen, setFiltersIsModalOpen] = useState(true);
+
   const { areValuesVisible } = useHome();
 
   const handleSlideChange = useCallback((swiper: SwiperClass) => {
@@ -17,12 +19,23 @@ export function useTransactionsController() {
     })
   }, [])
 
+  function handleOpenFiltersModal() {
+    setFiltersIsModalOpen(true)
+  }
+
+  function handleCloseFiltersModal() {
+    setFiltersIsModalOpen(false)
+  }
+
   return {
     sliderState,
     handleSlideChange,
     areValuesVisible,
     isInitialLoading: false,
     isLoading: false,
-    transactions: [{}]
+    transactions: [{}],
+    isFiltersModalOpen,
+    handleOpenFiltersModal,
+    handleCloseFiltersModal
   }
 }

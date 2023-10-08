@@ -14,12 +14,12 @@ export function TransactionTypeDropdown() {
   return (
     <DropdownMenu.Root open={isOpen} onOpenChange={handleIsOpen}>
       <DropdownMenu.Trigger>
-        <div className="flex items-center gap-2">
+        <button className="flex items-center gap-2">
           <TransactionsIcon />
           <span className="text-sm text-gray-800 tracking-[-0.5px] font-medium">Transações</span>
           {isOpen && <ChevronUpIcon className="text-gray-900" /> }
           {!isOpen && <ChevronDownIcon className="text-gray-900" />}
-        </div>
+        </button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Content side="bottom" align="start" className="z-50">
         <DropdownMenu.Item>
