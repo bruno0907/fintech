@@ -18,9 +18,9 @@ export function BankAccounts() {
     toggleValuesVisibility,
     isLoading,
     accounts,
-    handleOpenNewBankAccountModal
+    handleOpenNewBankAccountModal,
+    totalBalance
   } = useBankAccountController();
-
 
   return (
     <section className="flex flex-col flex-1 bg-teal-900 rounded-2xl px-4 py-8 md:p-10 lg:w-1/2">
@@ -38,7 +38,7 @@ export function BankAccounts() {
                 'text-2xl tracking-[-1px] text-white transition-all',
                 !areValuesVisible && 'blur-sm'
               )}>
-                {formatCurrency(15000)}
+                {formatCurrency(totalBalance)}
               </strong>
               <button
                 className="flex items-center justify-center h-8 w-8"
@@ -83,30 +83,17 @@ export function BankAccounts() {
                   />
                 </span>
 
-                <SwiperSlide>
-                  <AccountCard
-                    color="#7950F2"
-                    name="Nubank"
-                    balance={5000}
-                    type="CHECKING"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <AccountCard
-                    color="#333"
-                    name="XP"
-                    balance={5000}
-                    type="INVESTMENT"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <AccountCard
-                    color="#2f2"
-                    name="Dinheiro"
-                    balance={5000}
-                    type="CASH"
-                  />
-                </SwiperSlide>
+                {accounts?.map(account => (
+                  <SwiperSlide key={account.id}>
+                    <AccountCard
+                      color={account.color}
+                      name={account.name}
+                      balance={account.currentBalance}
+                      type={account.type}
+                    />
+                  </SwiperSlide>
+                ))}
+
               </Swiper>
             )}
           </div>

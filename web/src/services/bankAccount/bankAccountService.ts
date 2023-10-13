@@ -1,17 +1,17 @@
 import { CreateBankAccountParams, CreateBankAccountService } from './createService';
-import { ListAllBankAccountsService, BankAccountsResponse } from './listAllService';
+import { GetAllBankAccountsService, BankAccountsResponse } from './getAllService';
 
 class BankAccountService {
   constructor(
     private readonly createBankAccountService = new CreateBankAccountService(),
-    private readonly listAllBankAccountsService = new ListAllBankAccountsService()
+    private readonly listAllBankAccountsService = new GetAllBankAccountsService()
   ) {}
 
   create(params: CreateBankAccountParams) {
     return this.createBankAccountService.execute(params);
   }
 
-  listAll() {
+  getAll() {
     return this.listAllBankAccountsService.execute();
   }
 }

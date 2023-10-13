@@ -1,26 +1,20 @@
 import { BankAccountType } from '../../app/types/BankAccountType';
 import { httpClientService } from '../httpClientService';
 
-interface Transaction {
-  type: BankAccountType;
-  value: number;
-}
-
 export interface BankAccountsResponse {
   id: string;
-  userId: string;
   name: string;
   initialBalance: number;
-  type: string;
+  type: BankAccountType;
   color: string;
   currentBalance: number;
-  transactions: Transaction[];
 }
 
-export class ListAllBankAccountsService {
+export class GetAllBankAccountsService {
   constructor(private readonly httpClient = httpClientService) {}
 
   async execute() {
-    return await this.httpClient.get<BankAccountsResponse[]>('/bank-accounts');
+    const { data } = await this.httpClient.get<BankAccountsResponse[]>('/bank-accounts');
+    return data;
   }
 }

@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { BankAccountType } from '../../../../../app/types/BankAccountType';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { queryClient } from '../../../../../app/config/queryClient';
 
 const createAccountSchema = z.object({
   name: z.string().nonempty('Nome da conta é obrigatório'),
@@ -34,7 +35,26 @@ export function useNewBankAccountController() {
     mutationFn: async (data: FormData) => await bankAccountService.create({
       ...data,
       initialBalance: Number(data.initialBalance)
-    })
+    }),
+    onMutate: async (newData) => {
+      await queryClient.cancelQueries({ queryKey: ['bank-accounts']});
+
+      const previousBankAccounts = queryClient.getQueryData(['bank-accounts']);
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      queryClient.setQueryData(['bank-accounts'], (previousAccounts: any) => [
+        ...previousAccounts,
+        newData
+      ]);
+
+      return { previousBankAccounts };
+    },
+    onError: () => {
+      queryClient.invalidateQueries({ queryKey: ['bank-accounts']});
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['bank-accounts']});
+    }
   });
 
   const handleSubmit = onSubmit(async (data) => {
