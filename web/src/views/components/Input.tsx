@@ -18,7 +18,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ id, name, place
         id={inputId}
         name={name}
         className={cn(
-          'bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] tex-gray-800 pt-4 placeholder-shown:pt-0 peer placeholder:invisible transition-all',
+          'bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] tex-gray-800 pt-4 placeholder-shown:pt-0 peer placeholder:invisible transition-all disabled:opacity-50 disabled:bg-gray-100',
           hasError && 'border-red-900'
         )}
         placeholder={placeholder}

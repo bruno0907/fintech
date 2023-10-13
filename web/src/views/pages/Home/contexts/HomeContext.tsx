@@ -26,7 +26,7 @@ export const HomeContext = createContext({} as HomeContextValue);
 export function HomeProvider({ children }: HomeContextProviderProps) {
   const [areValuesVisible, setAreValuesVisible] = useState(false);
   const [isNewBankAccountModalOpen, setIsNewBankAccountModalOpen] = useState(false);
-  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(true);
+  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
   const [newTransactionType, setNewTransationType] = useState<TransactionType>(null);
 
   const toggleValuesVisibility = useCallback(() => {

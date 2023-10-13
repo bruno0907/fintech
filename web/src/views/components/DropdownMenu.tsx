@@ -7,6 +7,10 @@ interface DropdownMenuDefaultProps {
   className?: string;
 }
 
+interface TriggerProps {
+  children: ReactNode
+}
+
 function Root({ children, ...rest }: DropdownMenuDefaultProps & RadixDropdownMenu.DropdownMenuProps) {
   return (
     <RadixDropdownMenu.Root {...rest}>
@@ -15,9 +19,9 @@ function Root({ children, ...rest }: DropdownMenuDefaultProps & RadixDropdownMen
   );
 }
 
-function Trigger({ children }: { children: ReactNode }) {
+function Trigger({ children, ...rest }: TriggerProps & RadixDropdownMenu.DropdownMenuTriggerProps) {
   return (
-    <RadixDropdownMenu.Trigger className='outline-none select-none' asChild>
+    <RadixDropdownMenu.Trigger className='outline-none select-none' asChild {...rest}>
       {children}
     </RadixDropdownMenu.Trigger>
   );

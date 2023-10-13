@@ -7,26 +7,32 @@ import { Color, colors } from '../../app/config/constants';
 import { ColorIcon } from '../../assets/icons/ColorIcon';
 
 interface ColorsDropdownInputProps {
-  name: string
   hasError?: FieldError
   className?: string;
   placeholder?: string;
+  onChange?: (color: string) => void
+  value?: string;
+  disabled?: boolean;
 }
 
-export function ColorsDropdownInput({ hasError, className, placeholder }: ColorsDropdownInputProps) {
-  const [selectedColor, setSelectedColor] = useState<null | Color>(null);
+export function ColorsDropdownInput({ hasError, className, placeholder, onChange, value, disabled }: ColorsDropdownInputProps) {
+  const [selectedColor, setSelectedColor] = useState<null | Color>(() => {
+    return colors.find(c => c.color === value) ?? null;
+  });
 
   function handleSelectColor(color: Color) {
     setSelectedColor(color);
+    onChange?.(color.color);
   }
 
   return (
     <div className='relative'>
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger>
+        <DropdownMenu.Trigger disabled={disabled} value={value}>
           <button
+            disabled={disabled}
             className={cn(
-              'relative bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] tex-gray-700 transition-all outline-none text-left',
+              'relative bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] tex-gray-700 transition-all outline-none text-left  disabled:opacity-50 disabled:bg-gray-100',
               hasError && 'border-red-900',
               className
             )}

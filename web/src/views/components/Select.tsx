@@ -5,21 +5,24 @@ import { FieldError } from 'react-hook-form';
 import { useState } from 'react';
 
 interface SelectProps {
-  name: string
   hasError?: FieldError
   className?: string;
   placeholder?: string;
+  onChange?: (value: string) => void;
+  value?: string;
+  disabled?: boolean;
   options: {
     value: string;
     label: string;
   }[];
 }
 
-export function Select({ hasError, className, placeholder, options }: SelectProps) {
-  const [selectedValue, setSelectedValue] = useState<null | string>(null);
+export function Select({ hasError, className, placeholder, options, onChange, value, disabled }: SelectProps) {
+  const [selectedValue, setSelectedValue] = useState(value);
 
   function handleSelectValue(value: string) {
     setSelectedValue(value);
+    onChange?.(value);
   }
 
   return (
@@ -33,10 +36,11 @@ export function Select({ hasError, className, placeholder, options }: SelectProp
       >
         {placeholder}
       </label>
-      <RadixSelect.Root onValueChange={event => handleSelectValue(event)}>
+      <RadixSelect.Root onValueChange={event => handleSelectValue(event)} value={value}>
         <RadixSelect.Trigger
+          disabled={disabled}
           className={cn(
-            'pt-4 relative bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] tex-gray-800 transition-all outline-none text-left',
+            'pt-4 relative bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px] tex-gray-800 transition-all outline-none text-left disabled:opacity-50 disabled:bg-gray-100',
             hasError && 'border-red-900',
             className
           )}
