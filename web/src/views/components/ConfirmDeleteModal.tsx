@@ -8,9 +8,10 @@ interface ConfirmDeleteModalProps {
   description?: string;
   onConfirm: () => void;
   onCancel: () => void;
+  isDeleting: boolean;
 }
 
-export function ConfirmDeleteModal({ onClose, title, description, onConfirm, onCancel }: ConfirmDeleteModalProps) {
+export function ConfirmDeleteModal({ onClose, title, description, onConfirm, onCancel, isDeleting }: ConfirmDeleteModalProps) {
 
   return (
     <Modal
@@ -32,8 +33,18 @@ export function ConfirmDeleteModal({ onClose, title, description, onConfirm, onC
 
 
         <div className='space-y-3'>
-          <Button variant="DANGER" onClick={onConfirm}>Sim, desejo excluir</Button>
-          <Button variant="GHOST" onClick={onCancel}>Cancelar</Button>
+          <Button
+            variant="DANGER"
+            onClick={onConfirm}
+            disabled={isDeleting}
+            isLoading={isDeleting}
+          >Sim, desejo excluir</Button>
+          <Button
+            variant="GHOST"
+            onClick={onCancel}
+            disabled={isDeleting}
+            isLoading={isDeleting}
+          >Cancelar</Button>
         </div>
 
       </div>

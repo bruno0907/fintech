@@ -24,7 +24,8 @@ export function EditBankAccountModal() {
     isDeleteModalOpen,
     handleOpenDeleteModal,
     handleCloseDeleteModal,
-    handleDeleteAccount
+    handleDeleteAccount,
+    isDeleting
   } = useEditBankAccountController();
 
   if(isDeleteModalOpen) {
@@ -35,6 +36,7 @@ export function EditBankAccountModal() {
         description="Ao excluir a conta, também serão excluídos todos os registros de receitas e despesas relacionados."
         onConfirm={handleDeleteAccount}
         onCancel={handleCloseDeleteModal}
+        isDeleting={isDeleting}
       />
     );
   }

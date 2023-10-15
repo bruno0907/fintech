@@ -1,4 +1,5 @@
 import { CreateBankAccountParams, CreateBankAccountService } from './createService';
+import { DeleteBankAccountService } from './deleteService';
 import { GetAllBankAccountsService, BankAccountsResponse } from './getAllService';
 import { UpdateBankAccountParams, UpdateBankAccountService } from './updateBankAccountService';
 
@@ -7,6 +8,7 @@ class BankAccountService {
     private readonly createBankAccountService = new CreateBankAccountService(),
     private readonly listAllBankAccountsService = new GetAllBankAccountsService(),
     private readonly updateBankAccountService = new UpdateBankAccountService(),
+    private readonly deleteBankAccountService = new DeleteBankAccountService(),
   ) {}
 
   create(params: CreateBankAccountParams) {
@@ -19,6 +21,10 @@ class BankAccountService {
 
   update(params: UpdateBankAccountParams) {
     return this.updateBankAccountService.execute(params);
+  }
+
+  delete(id: string) {
+    return this.deleteBankAccountService.execute(id);
   }
 }
 

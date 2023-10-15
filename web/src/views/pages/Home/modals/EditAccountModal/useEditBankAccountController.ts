@@ -54,21 +54,23 @@ export function useEditBankAccountController() {
     })
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: async () => await bankAccountService.delete(accountToEdit!.id)
+  });
+
   const handleSubmit = onSubmit(async (data) => {
     try {
       await updateMutation.mutateAsync(data);
       queryClient.invalidateQueries({ queryKey: ['bank-accounts']});
-      toast.success('Conta cadastrada com sucesso!');
+      toast.success('Conta atualizada com sucesso!');
       reset();
       handleCloseEditBankAccountModal();
 
     } catch (error) {
       console.error(error);
-      toast.error('Ocorreu um erro ao cadastrar sua conta!');
+      toast.error('Ocorreu um erro ao atualizar sua conta!');
     }
   });
-
-
 
   function handleOpenDeleteModal() {
     setIsDeleteModalOpen(true);
@@ -78,8 +80,16 @@ export function useEditBankAccountController() {
     setIsDeleteModalOpen(false);
   }
 
-  function handleDeleteAccount() {
-    console.log({ accountToEdit });
+  async function handleDeleteAccount() {
+    try {
+      await deleteMutation.mutateAsync();
+      queryClient.invalidateQueries(['bank-accounts']);
+      toast.success('Conta excluída com sucesso!');
+      handleCloseEditBankAccountModal();
+    } catch (error) {
+      console.error(error);
+      toast.error('Ocorreu um erro com a exclusão da sua conta');
+    }
   }
 
   return {
@@ -93,6 +103,7 @@ export function useEditBankAccountController() {
     isDeleteModalOpen,
     handleCloseDeleteModal,
     handleOpenDeleteModal,
-    handleDeleteAccount
+    handleDeleteAccount,
+    isDeleting: deleteMutation.isLoading
   };
 }
