@@ -24,12 +24,14 @@ export function SignIn() {
           type="email"
           placeholder="E-mail"
           hasError={errors.email}
+          disabled={isLoading}
           {...register('email')}
         />
         <Input
           type="password"
           placeholder="Senha"
           hasError={errors.password}
+          disabled={isLoading}
           {...register('password')}
         />
         <Button type="submit" isLoading={isLoading}>Entrar</Button>

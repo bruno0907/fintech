@@ -21,18 +21,21 @@ export function SignUp() {
           type="text"
           placeholder="Nome completo"
           hasError={errors.name}
+          disabled={isLoading}
           {...register('name')}
         />
         <Input
           type="email"
           placeholder="Seu melhor e-mail"
           hasError={errors.email}
+          disabled={isLoading}
           {...register('email')}
         />
         <Input
           type="password"
           placeholder="Senha"
           hasError={errors.password}
+          disabled={isLoading}
           {...register('password')}
         />
         <Button type="submit" isLoading={isLoading}>Criar conta</Button>

@@ -16,7 +16,7 @@ export function UserMenu() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
-        <Avatar.Root className="w-12 h-12 flex items-center justify-center bg-teal-0 rounded-full">
+        <Avatar.Root className="w-12 h-12 flex items-center justify-center bg-teal-0 rounded-full cursor-pointer">
           <Avatar.Fallback className="text-teal-900 font-medium text-sm tracking-[-0.5px]">
             {firstName[0]}{lastName[0]}
           </Avatar.Fallback>
