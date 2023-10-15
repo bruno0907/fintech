@@ -1,14 +1,7 @@
-import { BankAccountType } from '../../app/types/BankAccountType';
+import { BankAccount } from '../../app/types/BankAccount';
 import { httpClientService } from '../httpClientService';
 
-export interface BankAccountsResponse {
-  id: string;
-  name: string;
-  initialBalance: number;
-  type: BankAccountType;
-  color: string;
-  currentBalance: number;
-}
+export type BankAccountsResponse = BankAccount;
 
 export class GetAllBankAccountsService {
   constructor(private readonly httpClient = httpClientService) {}

@@ -1,27 +1,29 @@
-import { BankAccountType } from '../../../../../app/types/BankAccountType';
+import { BankAccount } from '../../../../../app/types/BankAccount';
 import { cn } from '../../../../../app/utils/cn';
 import { formatCurrency } from '../../../../../app/utils/formatCurrency';
 import { BankAccountTypeIcon } from '../../../../../assets/icons/BankAccountTypeIcon';
 import { useBankAccountController } from './useBankAccountsController';
 
 interface AccountCardProps {
-  color: string;
-  name: string;
-  balance:number;
-  type: BankAccountType;
+  account: BankAccount;
 }
 
-export function AccountCard({ color, name, balance, type }: AccountCardProps) {
-  const { areValuesVisible } = useBankAccountController();
+export function AccountCard({ account }: AccountCardProps) {
+  const {
+    areValuesVisible,
+    handleOpenEditBankAccountModal
+  } = useBankAccountController();
 
   return (
     <div
+      role="button"
       className="h-[200px] bg-white rounded-2xl p-4 flex flex-col justify-between border-b-4 border-b-teal-950"
-      style={{ borderBottomColor: color}}
+      style={{ borderBottomColor: account.color}}
+      onClick={() => handleOpenEditBankAccountModal(account)}
     >
       <div>
-        <BankAccountTypeIcon type={type} />
-        <span className="text-gray-800 font-medium tracking-[-0.5px]">{name}</span>
+        <BankAccountTypeIcon type={account.type} />
+        <span className="text-gray-800 font-medium tracking-[-0.5px]">{account.name}</span>
       </div>
 
       <div>
@@ -30,7 +32,7 @@ export function AccountCard({ color, name, balance, type }: AccountCardProps) {
             'text-gray-800 font-medium tracking-[-0.5px] block transition-all',
             !areValuesVisible && 'blur-sm'
           )}>
-          {formatCurrency(balance)}
+          {formatCurrency(account.currentBalance)}
         </span>
         <small className="text-gray-600 text-sm">Saldo atual</small>
       </div>

@@ -14,7 +14,8 @@ export function useBankAccountController() {
   const {
     areValuesVisible,
     toggleValuesVisibility,
-    handleOpenNewBankAccountModal
+    handleOpenNewBankAccountModal,
+    handleOpenEditBankAccountModal
   } = useHome();
 
   const windowWidth = useWindowWidth();
@@ -46,6 +47,7 @@ export function useBankAccountController() {
     isLoading,
     accounts: data ?? [],
     handleOpenNewBankAccountModal,
-    totalBalance
+    totalBalance,
+    handleOpenEditBankAccountModal
   };
 }

@@ -1,10 +1,12 @@
 import { CreateBankAccountParams, CreateBankAccountService } from './createService';
 import { GetAllBankAccountsService, BankAccountsResponse } from './getAllService';
+import { UpdateBankAccountParams, UpdateBankAccountService } from './updateBankAccountService';
 
 class BankAccountService {
   constructor(
     private readonly createBankAccountService = new CreateBankAccountService(),
-    private readonly listAllBankAccountsService = new GetAllBankAccountsService()
+    private readonly listAllBankAccountsService = new GetAllBankAccountsService(),
+    private readonly updateBankAccountService = new UpdateBankAccountService(),
   ) {}
 
   create(params: CreateBankAccountParams) {
@@ -14,11 +16,16 @@ class BankAccountService {
   getAll() {
     return this.listAllBankAccountsService.execute();
   }
+
+  update(params: UpdateBankAccountParams) {
+    return this.updateBankAccountService.execute(params);
+  }
 }
 
 export type {
   CreateBankAccountParams,
-  BankAccountsResponse
+  BankAccountsResponse,
+  UpdateBankAccountParams,
 };
 
 export const bankAccountService = new BankAccountService();

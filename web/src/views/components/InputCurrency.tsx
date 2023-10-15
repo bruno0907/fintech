@@ -7,7 +7,7 @@ interface Props {
   hasError?: FieldError;
   onChange?: (value: string) => void;
   disabled?: boolean;
-  value?: string;
+  value?: string | number;
 }
 
 export function InputCurrency({ hasError, onChange, value, disabled }: Props & NumericFormatProps) {

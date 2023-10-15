@@ -17,7 +17,7 @@ interface ColorsDropdownInputProps {
 
 export function ColorsDropdownInput({ hasError, className, placeholder, onChange, value, disabled }: ColorsDropdownInputProps) {
   const [selectedColor, setSelectedColor] = useState<null | Color>(() => {
-    return colors.find(c => c.color === value) ?? null;
+    return colors.find(c => c.color.toUpperCase() === value?.toUpperCase()) ?? null;
   });
 
   function handleSelectColor(color: Color) {

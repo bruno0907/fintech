@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useCallback, useState } from 'react';
+import { BankAccount } from '../../../../app/types/BankAccount';
 
 interface HomeContextValue {
   areValuesVisible: boolean;
@@ -13,6 +14,12 @@ interface HomeContextValue {
   handleCloseNewTransactionModal: () => void;
 
   newTransactionType: TransactionType;
+
+  isEditBankAccountModalOpen: boolean;
+  handleOpenEditBankAccountModal: (bankAccount: BankAccount) => void;
+  handleCloseEditBankAccountModal: () => void;
+  accountToEdit: null | BankAccount;
+
 }
 
 interface HomeContextProviderProps {
@@ -28,6 +35,8 @@ export function HomeProvider({ children }: HomeContextProviderProps) {
   const [isNewBankAccountModalOpen, setIsNewBankAccountModalOpen] = useState(false);
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
   const [newTransactionType, setNewTransationType] = useState<TransactionType>(null);
+  const [isEditBankAccountModalOpen, setIsEditBankAccountModalOpen] = useState(false);
+  const [accountToEdit, setAccountToEdit] = useState<null | BankAccount>(null);
 
   const toggleValuesVisibility = useCallback(() => {
     setAreValuesVisible(prevState => !prevState);
@@ -45,9 +54,20 @@ export function HomeProvider({ children }: HomeContextProviderProps) {
     setNewTransationType(type);
     setIsNewTransactionModalOpen(true);
   }, []);
+
   const handleCloseNewTransactionModal = useCallback(() => {
     setNewTransationType(null);
     setIsNewTransactionModalOpen(false);
+  }, []);
+
+  const handleOpenEditBankAccountModal = useCallback((bankAccount: BankAccount) => {
+    setAccountToEdit(bankAccount);
+    setIsEditBankAccountModalOpen(true);
+  }, []);
+
+  const handleCloseEditBankAccountModal = useCallback(() => {
+    setIsEditBankAccountModalOpen(false);
+    setAccountToEdit(null);
   }, []);
 
   return (
@@ -61,6 +81,10 @@ export function HomeProvider({ children }: HomeContextProviderProps) {
       handleOpenNewTransactionModal,
       handleCloseNewTransactionModal,
       newTransactionType,
+      isEditBankAccountModalOpen,
+      handleOpenEditBankAccountModal,
+      handleCloseEditBankAccountModal,
+      accountToEdit
     }}>
       {children}
     </HomeContext.Provider>
