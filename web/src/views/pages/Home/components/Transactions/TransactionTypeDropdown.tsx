@@ -2,7 +2,7 @@ import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { TransactionsIcon } from '../../../../../assets/icons/TransactionsIcon';
 import { DropdownMenu } from '../../../../components/DropdownMenu';
 import { IncomeIcon } from '../../../../../assets/icons/IncomeIcon';
-import { ExpensesIcon } from '../../../../../assets/icons/ExpensesIcon';
+import { OutcomesIcon } from '../../../../../assets/icons/OutcomesIcon';
 import { useState } from 'react';
 
 export function TransactionTypeDropdown() {
@@ -27,7 +27,7 @@ export function TransactionTypeDropdown() {
           <span>Receitas</span>
         </DropdownMenu.Item>
         <DropdownMenu.Item>
-          <ExpensesIcon />
+          <OutcomesIcon />
           <span>Despesas</span>
         </DropdownMenu.Item>
         <DropdownMenu.Item>

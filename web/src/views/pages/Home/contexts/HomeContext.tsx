@@ -10,7 +10,7 @@ interface HomeContextValue {
   handleCloseNewBankAccountModal: () => void;
 
   isNewTransactionModalOpen: boolean;
-  handleOpenNewTransactionModal: (type:  'INCOME' | 'EXPENSE') => void;
+  handleOpenNewTransactionModal: (type:  'INCOME' | 'OUTCOME') => void;
   handleCloseNewTransactionModal: () => void;
 
   newTransactionType: TransactionType;
@@ -26,7 +26,7 @@ interface HomeContextProviderProps {
   children: ReactNode;
 }
 
-type TransactionType = null | 'INCOME' | 'EXPENSE'
+type TransactionType = null | 'INCOME' | 'OUTCOME'
 
 export const HomeContext = createContext({} as HomeContextValue);
 

@@ -14,6 +14,7 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
       selected={value}
       mode="single"
       onSelect={date => onChange(date ?? new Date())}
+      onDayClick={e => console.log(e)}
       classNames={{
         caption: 'flex items-center justify-between',
         nav: 'flex gap-1',

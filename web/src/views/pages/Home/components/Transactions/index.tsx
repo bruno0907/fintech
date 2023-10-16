@@ -98,7 +98,7 @@ export function Transactions() {
             <ScrollArea>
               <ul className="flex flex-col gap-2 px-4">
                 {Array.from({ length: 20 }).map((_, i) => {
-                  const type = i % 2 === 0 ? 'expense' : 'income';
+                  const type = i % 2 === 0 ? 'outcome' : 'income';
                   return (
                     <li key={i} className="flex align-center bg-white rounded-2xl p-4 gap-3">
                       <CategoryIcon type={type} />
@@ -108,10 +108,10 @@ export function Transactions() {
                       </div>
                       <span className={cn(
                         'my-auto font-medium tracking-[-0.5px] transition-all',
-                        type === 'expense' ? 'text-red-800' : 'text-green-800',
+                        type === 'outcome' ? 'text-red-800' : 'text-green-800',
                         !areValuesVisible && 'blur-sm'
                       )}>
-                        {`${type === 'expense' ? '-' : ''} ${formatCurrency(1000)}`}
+                        {`${type === 'outcome' ? '-' : ''} ${formatCurrency(1000)}`}
                       </span>
                     </li>
                   );

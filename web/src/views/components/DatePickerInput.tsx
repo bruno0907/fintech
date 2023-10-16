@@ -12,13 +12,16 @@ interface DatePickerInputProps {
   hasError?: FieldError
   className?: string;
   placeholder?: string;
+  value?: Date;
+  onChange?: (date: Date) => void;
 }
 
-export function DatePickerInput({ hasError, className, placeholder }: DatePickerInputProps) {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+export function DatePickerInput({ hasError, className, placeholder, value, onChange }: DatePickerInputProps) {
+  const [selectedDate, setSelectedDate] = useState(value ?? new Date());
 
   function handleSelectDate(date: Date) {
     setSelectedDate(date);
+    onChange?.(date);
   }
 
   return (

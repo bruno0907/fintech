@@ -2,8 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { SwiperClass } from 'swiper/react';
 import { useWindowWidth } from '../../../../../app/hooks/useWindowWidth';
 import { useHome } from '../../hooks/useHome';
-import { useQuery } from '@tanstack/react-query';
-import { bankAccountService } from '../../../../../services/bankAccount/bankAccountService';
+import { useBankAccounts } from '../../../../../app/hooks/useBankAccounts';
 
 export function useBankAccountController() {
   const [sliderState, setSliderState] = useState({
@@ -20,16 +19,13 @@ export function useBankAccountController() {
 
   const windowWidth = useWindowWidth();
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['bank-accounts'],
-    queryFn: async () => bankAccountService.getAll(),
-  });
+  const { accounts, isLoading } = useBankAccounts();
 
   const totalBalance = useMemo(() => {
-    if(!data) return 0;
+    if(!accounts) return 0;
 
-    return data.reduce((acc, account) => acc + account.currentBalance, 0);
-  }, [data]);
+    return accounts.reduce((acc, account) => acc + account.currentBalance, 0);
+  }, [accounts]);
 
   const handleSlideChange = useCallback((swiper: SwiperClass) => {
     setSliderState({
@@ -45,7 +41,7 @@ export function useBankAccountController() {
     areValuesVisible,
     toggleValuesVisibility,
     isLoading,
-    accounts: data ?? [],
+    accounts,
     handleOpenNewBankAccountModal,
     totalBalance,
     handleOpenEditBankAccountModal

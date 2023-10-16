@@ -1,6 +1,9 @@
 import { useCallback, useState } from 'react';
 import { SwiperClass } from 'swiper/react';
 import { useHome } from '../../hooks/useHome';
+import { useQuery } from '@tanstack/react-query';
+import { transactionService } from '../../../../../services/transaction/transactionService';
+
 
 export function useTransactionsController() {
   const [sliderState, setSliderState] = useState({
@@ -11,6 +14,11 @@ export function useTransactionsController() {
   const [isFiltersModalOpen, setFiltersIsModalOpen] = useState(false);
 
   const { areValuesVisible } = useHome();
+
+  const { data: transactions, isLoading } = useQuery({
+    queryFn: async () => await transactionService.getAll({ month: 8, year: 2023 }),
+    queryKey: ['transactions'],
+  });
 
   const handleSlideChange = useCallback((swiper: SwiperClass) => {
     setSliderState({
@@ -32,8 +40,8 @@ export function useTransactionsController() {
     handleSlideChange,
     areValuesVisible,
     isInitialLoading: false,
-    isLoading: false,
-    transactions: [{}],
+    isLoading,
+    transactions: transactions ?? [{}],
     isFiltersModalOpen,
     handleOpenFiltersModal,
     handleCloseFiltersModal
