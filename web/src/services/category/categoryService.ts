@@ -1,12 +1,12 @@
-import { ListAllCategoriesService, CategoryResponse } from './listAll';
+import { GetAllCategoriesService, CategoryResponse } from './getAllService';
 
 class CategoryService {
   constructor(
-    private readonly listAllCategoriesService = new ListAllCategoriesService(),
+    private readonly getAllCategoriesService = new GetAllCategoriesService(),
   ) {}
 
-  listAll() {
-    return this.listAllCategoriesService.execute();
+  getAll() {
+    return this.getAllCategoriesService.execute();
   }
 }
 

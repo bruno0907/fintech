@@ -1,20 +1,14 @@
+import { Transaction } from '../../app/types/Transaction';
 import { TransactionType } from '../../app/types/TransactionType';
 import { httpClientService } from '../httpClientService';
 
-interface TransactionResponse {
-  id: string;
-  userId: string;
-  bankAccountId: string;
-  categoryId: string;
-  name: string;
-  value: number;
-  date: Date;
-  type: TransactionType;
-}
+type TransactionResponse = Transaction;
 
 export interface GetAllTransactionParams {
   month: number;
   year: number;
+  bankAccountId?: string;
+  type?: TransactionType;
 }
 
 export class GetAllTransactionService {
@@ -22,8 +16,15 @@ export class GetAllTransactionService {
     private readonly httpClient = httpClientService,
   ) {}
 
-  async execute({ month, year }: GetAllTransactionParams) {
-    const { data } = await this.httpClient.get<TransactionResponse[]>(`/transactions?month=${month}&year=${year}`);
+  async execute({ month, year, bankAccountId, type }: GetAllTransactionParams) {
+    const { data } = await this.httpClient.get<TransactionResponse[]>('/transactions', {
+      params: {
+        month,
+        year,
+        bankAccountId,
+        type
+      }
+    });
     return data;
   }
 }

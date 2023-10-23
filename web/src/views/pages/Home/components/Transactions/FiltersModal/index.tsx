@@ -3,25 +3,21 @@ import { Modal } from '../../../../../components/Modal';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { cn } from '../../../../../../app/utils/cn';
 import { useFiltersModal } from './useFiltersModal';
+import { TransactionFiltersProps } from '../useTransactionsController';
 
-
-interface Props {
+interface FiltersModalProps {
   open: boolean;
   onClose: () => void;
+  onApplyFilters: (params: TransactionFiltersProps) => void;
 }
 
-const mockedBankAccounts = [
-  { id: '1', name: 'Nubank' },
-  { id: '2', name: 'Inter' },
-  { id: '3', name: 'Dinheiro' },
-];
-
-export function FiltersModal({ onClose, open }: Props) {
+export function FiltersModal({ onClose, open, onApplyFilters }: FiltersModalProps) {
   const {
     selectedBankAccountId,
     handleSelecteBankAccountId,
-    selectedYear,
-    handleSelectYear
+    handleSelectYear,
+    accounts,
+    selectedYear
   } = useFiltersModal();
 
   return (
@@ -34,17 +30,17 @@ export function FiltersModal({ onClose, open }: Props) {
           </span>
 
           <ul className="space-y-2">
-            {mockedBankAccounts.map(bankAccount => {
+            {accounts.map(account => {
               return (
-                <li key={bankAccount.id}>
+                <li key={account.id}>
                   <button
                     className={cn(
                       'p-2 rounded-2xl w-full hover:bg-gray-100 text-gray-800',
-                      selectedBankAccountId === bankAccount.id && 'bg-gray-200'
+                      selectedBankAccountId === account.id && 'bg-gray-200'
                     )}
-                    onClick={() => handleSelecteBankAccountId(bankAccount.id)}
+                    onClick={() => handleSelecteBankAccountId(account.id)}
                   >
-                    {bankAccount.name}
+                    {account.name}
                   </button>
                 </li>
               );
@@ -75,7 +71,10 @@ export function FiltersModal({ onClose, open }: Props) {
           </div>
         </div>
 
-        <Button>
+        <Button onClick={() => onApplyFilters({
+          bankAccountId: selectedBankAccountId,
+          year: selectedYear
+        })}>
           Aplicar filtros
         </Button>
       </div>

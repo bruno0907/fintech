@@ -10,10 +10,10 @@ import { Travel } from './outcome/Travel';
 import { Income } from './income/Income';
 
 export const iconsMap = {
-  income: {
+  INCOME: {
     default: Income,
   },
-  outcome: {
+  OUTCOME: {
     default: Outcome,
     food: Food,
     fun: Fun,

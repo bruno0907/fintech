@@ -26,11 +26,11 @@ export function Fab() {
         </DropdownMenu.Trigger>
         <DropdownMenu.Content side="top" align="end">
           <DropdownMenu.Item onSelect={() => handleOpenNewTransactionModal('OUTCOME')}>
-            <CategoryIcon type="outcome" />
+            <CategoryIcon type="OUTCOME" />
             <span>Nova Despesa</span>
           </DropdownMenu.Item>
           <DropdownMenu.Item onSelect={() => handleOpenNewTransactionModal('INCOME')}>
-            <CategoryIcon type="income" />
+            <CategoryIcon type="INCOME" />
             <span>Nova Receita</span>
           </DropdownMenu.Item>
           <DropdownMenu.Item onSelect={handleOpenNewBankAccountModal}>

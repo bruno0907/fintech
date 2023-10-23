@@ -1,13 +1,9 @@
+import { Category } from '../../app/types/Category';
 import { httpClientService } from '../httpClientService';
 
-export interface CategoryResponse {
-  id: string;
-  name: string;
-  type: string;
-  icon: string;
-}
+export type CategoryResponse = Category;
 
-export class ListAllCategoriesService {
+export class GetAllCategoriesService {
   constructor(private readonly httpClient = httpClientService) {}
 
   async execute() {

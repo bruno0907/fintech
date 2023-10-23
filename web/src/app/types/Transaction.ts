@@ -1,6 +1,16 @@
-import { BankAccountType } from './BankAccountType';
+import { TransactionType } from './TransactionType';
 
 export interface Transaction {
-  type: BankAccountType;
+  id: string;
+  name: string;
   value: number;
+  date: Date;
+  type: TransactionType;
+  category?: Category
+}
+
+interface Category {
+  id: string;
+  name: string;
+  icon: string;
 }

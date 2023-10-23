@@ -3,7 +3,7 @@ import { FieldError } from 'react-hook-form';
 import { cn } from '../../app/utils/cn';
 import { CrossCircledIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
-import { formateDate } from '../../app/utils/formatDate';
+import { formatDate } from '../../app/utils/formatDate';
 import { Popover } from './Popover';
 import { DatePicker } from './DatePicker';
 
@@ -37,7 +37,7 @@ export function DatePickerInput({ hasError, className, placeholder, value, onCha
             )}
           >
             <span className='absolute text-gray-700 text-xs left-[13px] top-2 pointer-events-none'>{placeholder}</span>
-            <span>{formateDate(selectedDate)}</span>
+            <span>{formatDate(selectedDate)}</span>
 
           </button>
         </Popover.Trigger>

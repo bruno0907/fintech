@@ -13,6 +13,7 @@ import { TransactionTypeDropdown } from './TransactionTypeDropdown';
 import { FilterIcon } from '../../../../../assets/icons/FilterIcon';
 import { ScrollArea } from '../../../../components/ScrollArea';
 import { FiltersModal } from './FiltersModal';
+import { formatDate } from '../../../../../app/utils/formatDate';
 
 export function Transactions() {
   const {
@@ -24,7 +25,10 @@ export function Transactions() {
     transactions,
     isFiltersModalOpen,
     handleOpenFiltersModal,
-    handleCloseFiltersModal
+    handleCloseFiltersModal,
+    transactionParams,
+    handleChangeTransactionParams,
+    handleApplyFilters
   } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
@@ -41,7 +45,10 @@ export function Transactions() {
         <>
           <header className="flex flex-col gap-6 max-w-full">
             <div className="flex items-center justify-between">
-              <TransactionTypeDropdown />
+              <TransactionTypeDropdown
+                onSelect={handleChangeTransactionParams('type')}
+                selectedType={transactionParams.type}
+              />
               <button onClick={handleOpenFiltersModal}>
                 <FilterIcon />
               </button>
@@ -50,6 +57,7 @@ export function Transactions() {
             <FiltersModal
               onClose={handleCloseFiltersModal}
               open={isFiltersModalOpen}
+              onApplyFilters={handleApplyFilters}
             />
 
             <div className="relative">
@@ -62,6 +70,7 @@ export function Transactions() {
                   spaceBetween={20}
                   slidesPerView={3}
                   centeredSlides
+                  initialSlide={transactionParams.month}
                   onSlideChange={handleSlideChange}
                 >
                   {MONTH.map((month, index) => (
@@ -97,21 +106,24 @@ export function Transactions() {
           {(hasTransactions && !isLoading) && (
             <ScrollArea>
               <ul className="flex flex-col gap-2 px-4">
-                {Array.from({ length: 20 }).map((_, i) => {
-                  const type = i % 2 === 0 ? 'outcome' : 'income';
+                {transactions.map((transaction, i) => {
                   return (
                     <li key={i} className="flex align-center bg-white rounded-2xl p-4 gap-3">
-                      <CategoryIcon type={type} />
+                      <CategoryIcon type={transaction.type} category={transaction.category?.icon} />
                       <div className="flex-1">
-                        <strong className="block leading-none text-gray-800 tracking-[-0.5px]">Almoço</strong>
-                        <span className="text-sm text-gray-600 leading-none">04/06/2023</span>
+                        <strong className="block leading-none text-gray-800 tracking-[-0.5px]">
+                          {transaction.name}
+                        </strong>
+                        <span className="text-sm text-gray-600 leading-none">
+                          {formatDate(new Date(transaction.date))}
+                        </span>
                       </div>
                       <span className={cn(
                         'my-auto font-medium tracking-[-0.5px] transition-all',
-                        type === 'outcome' ? 'text-red-800' : 'text-green-800',
+                        transaction.type === 'OUTCOME' ? 'text-red-800' : 'text-green-800',
                         !areValuesVisible && 'blur-sm'
                       )}>
-                        {`${type === 'outcome' ? '-' : ''} ${formatCurrency(1000)}`}
+                        {`${transaction.type === 'OUTCOME' ? '-' : '+'} ${formatCurrency(transaction.value)}`}
                       </span>
                     </li>
                   );
