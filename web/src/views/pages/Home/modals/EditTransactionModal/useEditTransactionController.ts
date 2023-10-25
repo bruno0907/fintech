@@ -82,16 +82,18 @@ export function useEditTransactionController({ transaction, onClose }: Props) {
   });
 
   async function handleDelete() {
+    const transactionType = transaction?.type === 'INCOME' ? 'Receita' : 'Despesa';
+
     try {
       await deleteMutation.mutateAsync();
       queryClient.invalidateQueries(['transactions']);
       queryClient.invalidateQueries(['bank-accounts']);
-      toast.success('Transação excluída com sucesso!');
+      toast.success(`${transactionType} excluída com sucesso!`);
       handleCloseDeleteModal();
       onClose();
     } catch (error) {
       console.error(error);
-      toast.error('Ocorreu um erro com a exclusão a transação');
+      toast.error(`Ocorreu um erro ao excluir a ${transactionType}`);
     }
   }
 
@@ -115,6 +117,6 @@ export function useEditTransactionController({ transaction, onClose }: Props) {
     handleOpenDeleteModal,
     handleCloseDeleteModal,
     handleDelete,
-    isDeleting: deleteMutation.isLoading
+    isDeleting: deleteMutation.isLoading,
   };
 }

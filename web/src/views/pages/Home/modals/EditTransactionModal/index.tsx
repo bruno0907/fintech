@@ -30,23 +30,22 @@ export function EditTransactionModal({ transaction, onClose, isOpen }: EditTrans
     handleOpenDeleteModal,
     handleCloseDeleteModal,
     handleDelete,
-    isDeleting
+    isDeleting,
   } = useEditTransactionController({ transaction, onClose });
+
+  const isOutcome = transaction?.type === 'OUTCOME';
 
   if(isDeleteTransactionModalOpen) {
     return (
       <ConfirmDeleteModal
         onClose={handleCloseDeleteModal}
-        title="Tem certeza que deseja excluir esta conta?"
-        description="Ao excluir a conta, também serão excluídos todos os registros de receitas e despesas relacionados."
+        title={`Tem certeza que deseja excluir esta ${isOutcome ? 'despesa' : 'receita'}?`}
         onConfirm={handleDelete}
         onCancel={handleCloseDeleteModal}
         isDeleting={isDeleting}
       />
     );
   }
-
-  const isOutcome = transaction?.type === 'OUTCOME';
 
   return (
     <Modal
