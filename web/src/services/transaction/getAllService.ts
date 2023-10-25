@@ -9,6 +9,7 @@ export interface GetAllTransactionParams {
   year: number;
   bankAccountId?: string;
   type?: TransactionType;
+  orderBy?: 'asc' | 'desc'
 }
 
 export class GetAllTransactionService {
@@ -16,13 +17,14 @@ export class GetAllTransactionService {
     private readonly httpClient = httpClientService,
   ) {}
 
-  async execute({ month, year, bankAccountId, type }: GetAllTransactionParams) {
+  async execute({ month, year, bankAccountId, type, orderBy = 'desc' }: GetAllTransactionParams) {
     const { data } = await this.httpClient.get<TransactionResponse[]>('/transactions', {
       params: {
         month,
         year,
         bankAccountId,
-        type
+        type,
+        orderBy
       }
     });
     return data;

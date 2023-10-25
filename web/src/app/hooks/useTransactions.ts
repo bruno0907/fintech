@@ -5,8 +5,6 @@ export function useTransactions(params: GetAllTransactionParams) {
   const { data, isFetching, isInitialLoading, refetch, isFetched } = useQuery({
     queryFn: async () => await transactionService.getAll(params),
     queryKey: ['transactions'],
-    enabled: false,
-
   });
 
   return {

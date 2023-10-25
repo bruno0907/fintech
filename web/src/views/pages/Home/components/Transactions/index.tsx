@@ -14,6 +14,7 @@ import { FilterIcon } from '../../../../../assets/icons/FilterIcon';
 import { ScrollArea } from '../../../../components/ScrollArea';
 import { FiltersModal } from './FiltersModal';
 import { formatDate } from '../../../../../app/utils/formatDate';
+import { EditTransactionModal } from '../../modals/EditTransactionModal';
 
 export function Transactions() {
   const {
@@ -28,7 +29,11 @@ export function Transactions() {
     handleCloseFiltersModal,
     transactionParams,
     handleChangeTransactionParams,
-    handleApplyFilters
+    handleApplyFilters,
+    transactionToEdit,
+    isEditTransactionModalOpen,
+    handleOpenEditTransactionModal,
+    handleCloseEditTransactionModal
   } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
@@ -104,32 +109,46 @@ export function Transactions() {
           )}
 
           {(hasTransactions && !isLoading) && (
-            <ScrollArea>
-              <ul className="flex flex-col gap-2 px-4">
-                {transactions.map((transaction, i) => {
-                  return (
-                    <li key={i} className="flex align-center bg-white rounded-2xl p-4 gap-3">
-                      <CategoryIcon type={transaction.type} category={transaction.category?.icon} />
-                      <div className="flex-1">
-                        <strong className="block leading-none text-gray-800 tracking-[-0.5px]">
-                          {transaction.name}
-                        </strong>
-                        <span className="text-sm text-gray-600 leading-none">
-                          {formatDate(new Date(transaction.date))}
+            <>
+              {transactionToEdit && (
+                <EditTransactionModal
+                  transaction={transactionToEdit}
+                  isOpen={isEditTransactionModalOpen}
+                  onClose={handleCloseEditTransactionModal}
+                />
+              )}
+              <ScrollArea>
+                <ul className="flex flex-col gap-2 px-4">
+                  {transactions.map((transaction, i) => {
+                    return (
+                      <li
+                        key={i}
+                        className="flex align-center bg-white rounded-2xl p-4 gap-3"
+                        onClick={() => handleOpenEditTransactionModal(transaction)}
+                        role="button"
+                      >
+                        <CategoryIcon type={transaction.type} category={transaction.category?.icon} />
+                        <div className="flex-1">
+                          <strong className="block leading-none text-gray-800 tracking-[-0.5px]">
+                            {transaction.name}
+                          </strong>
+                          <span className="text-sm text-gray-600 leading-none">
+                            {formatDate(new Date(transaction.date))}
+                          </span>
+                        </div>
+                        <span className={cn(
+                          'my-auto font-medium tracking-[-0.5px] transition-all',
+                          transaction.type === 'OUTCOME' ? 'text-red-800' : 'text-green-800',
+                          !areValuesVisible && 'blur-sm'
+                        )}>
+                          {`${transaction.type === 'OUTCOME' ? '-' : '+'} ${formatCurrency(transaction.value)}`}
                         </span>
-                      </div>
-                      <span className={cn(
-                        'my-auto font-medium tracking-[-0.5px] transition-all',
-                        transaction.type === 'OUTCOME' ? 'text-red-800' : 'text-green-800',
-                        !areValuesVisible && 'blur-sm'
-                      )}>
-                        {`${transaction.type === 'OUTCOME' ? '-' : '+'} ${formatCurrency(transaction.value)}`}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </ScrollArea>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </ScrollArea>
+            </>
           )}
 
         </>

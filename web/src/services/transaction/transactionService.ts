@@ -1,10 +1,12 @@
 import { CreateTransactionParams, CreateTransactionService } from './createService';
 import { GetAllTransactionService, GetAllTransactionParams } from './getAllService';
+import { UpdateTransactioService, UpdateTransactionParams } from './updateService';
 
 class TransactionService {
   constructor(
     private readonly createTransactionService = new CreateTransactionService(),
     private readonly getAllTransactionService = new GetAllTransactionService(),
+    private readonly updateTransactionService = new UpdateTransactioService(),
   ) {}
 
   create(params: CreateTransactionParams) {
@@ -13,6 +15,10 @@ class TransactionService {
 
   getAll(params: GetAllTransactionParams) {
     return this.getAllTransactionService.execute(params);
+  }
+
+  update(params: UpdateTransactionParams) {
+    return this.updateTransactionService.execute(params);
   }
 }
 

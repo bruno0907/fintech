@@ -3,6 +3,7 @@ import { SwiperClass } from 'swiper/react';
 import { useHome } from '../../hooks/useHome';
 import { useTransactions } from '../../../../../app/hooks/useTransactions';
 import { GetAllTransactionParams } from '../../../../../services/transaction/getAllService';
+import { Transaction } from '../../../../../app/types/Transaction';
 
 export interface TransactionFiltersProps {
   bankAccountId: string | undefined;
@@ -19,6 +20,8 @@ export function useTransactionsController() {
     month: new Date().getMonth(),
     year: new Date().getFullYear(),
   });
+  const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] = useState(false);
+  const [transactionToEdit, setTransactionToEdit] = useState<null | Transaction>(null);
 
   const { areValuesVisible } = useHome();
 
@@ -46,6 +49,16 @@ export function useTransactionsController() {
     setFiltersIsModalOpen(false);
   }
 
+  const handleOpenEditTransactionModal = useCallback((transaction: Transaction) => {
+    setTransactionToEdit(transaction);
+    setIsEditTransactionModalOpen(true);
+  }, []);
+
+  const handleCloseEditTransactionModal = useCallback(() => {
+    setIsEditTransactionModalOpen(false);
+    setTransactionToEdit(null);
+  }, []);
+
   function handleChangeTransactionParams<TParams extends keyof GetAllTransactionParams>(param: TParams) {
     return (value: GetAllTransactionParams[TParams]) => {
       if(value === transactionParams[param]) return;
@@ -63,7 +76,7 @@ export function useTransactionsController() {
   }
 
   useEffect(() => {
-    if(isLoading && isTransactionsFetched) return;
+    if(isTransactionsFetched) return;
 
     refetchTransactions();
 
@@ -81,6 +94,10 @@ export function useTransactionsController() {
     handleCloseFiltersModal,
     handleChangeTransactionParams,
     transactionParams,
-    handleApplyFilters
+    handleApplyFilters,
+    handleOpenEditTransactionModal,
+    handleCloseEditTransactionModal,
+    isEditTransactionModalOpen,
+    transactionToEdit
   };
 }
