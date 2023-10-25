@@ -1,4 +1,5 @@
 import { CreateTransactionParams, CreateTransactionService } from './createService';
+import { DeleteTransactionService } from './deleteService';
 import { GetAllTransactionService, GetAllTransactionParams } from './getAllService';
 import { UpdateTransactioService, UpdateTransactionParams } from './updateService';
 
@@ -7,6 +8,7 @@ class TransactionService {
     private readonly createTransactionService = new CreateTransactionService(),
     private readonly getAllTransactionService = new GetAllTransactionService(),
     private readonly updateTransactionService = new UpdateTransactioService(),
+    private readonly deleteTransactionService = new DeleteTransactionService(),
   ) {}
 
   create(params: CreateTransactionParams) {
@@ -19,6 +21,10 @@ class TransactionService {
 
   update(params: UpdateTransactionParams) {
     return this.updateTransactionService.execute(params);
+  }
+
+  delete(id: string) {
+    return this.deleteTransactionService.execute(id);
   }
 }
 

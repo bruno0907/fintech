@@ -7,7 +7,7 @@ import { transactionService } from '../../../../../services/transaction/transact
 import { toast } from 'react-hot-toast';
 import { useBankAccounts } from '../../../../../app/hooks/useBankAccounts';
 import { useCategories } from '../../../../../app/hooks/useCategories';
-import { useMemo,  } from 'react';
+import { useMemo, useState,  } from 'react';
 import { Transaction } from '../../../../../app/types/Transaction';
 
 const editTransactionSchema = z.object({
@@ -25,25 +25,26 @@ const editTransactionSchema = z.object({
 type FormData = z.infer<typeof editTransactionSchema>;
 
 interface Props {
-  transaction: Transaction;
+  transaction: null | Transaction;
   onClose: () => void;
 }
 export function useEditTransactionController({ transaction, onClose }: Props) {
+  const [isDeleteTransactionModalOpen, setIsDeletingTransactionModalOpen] = useState(false);
   const { accounts } = useBankAccounts();
   const { categories: categoriesList } = useCategories();
 
   const categories = useMemo(() => {
-    return categoriesList.filter(category => category.type === transaction.type);
+    return categoriesList.filter(category => category.type === transaction!.type);
   }, [categoriesList, transaction]);
 
-  const { isLoading, mutateAsync } = useMutation({
+  const updateMutation = useMutation({
     mutationFn: async (data: FormData) => transactionService.update({
       id: data.id,
       bankAccountId: data.bankAccountId,
       categoryId: data.categoryId,
       date: data.date,
       name: data.name,
-      type: transaction.type,
+      type: transaction!.type,
       value: Number(data.value),
     }),
   });
@@ -51,20 +52,20 @@ export function useEditTransactionController({ transaction, onClose }: Props) {
   const { handleSubmit: onSubmit, register, control, reset, formState: { errors }} = useForm<FormData>({
     resolver: zodResolver(editTransactionSchema),
     defaultValues: {
-      id: transaction.id,
-      bankAccountId: transaction.bankAccountId,
-      categoryId: transaction.category?.id,
-      name: transaction.name,
-      date: new Date(transaction.date),
-      value: transaction.value
+      id: transaction!.id,
+      bankAccountId: transaction!.bankAccountId,
+      categoryId: transaction!.category?.id,
+      name: transaction!.name,
+      date: new Date(transaction!.date),
+      value: transaction!.value
     }
   });
 
   const handleSubmit = onSubmit(async (data: FormData) => {
-    const isOutcome = transaction.type === 'OUTCOME' ? 'Despesa' : 'Receita';
+    const isOutcome = transaction!.type === 'OUTCOME' ? 'Despesa' : 'Receita';
 
     try {
-      await mutateAsync(data);
+      await updateMutation.mutateAsync(data);
       queryClient.invalidateQueries({ queryKey: ['transactions']});
       queryClient.invalidateQueries({ queryKey: ['bank-accounts']});
       toast.success(`${isOutcome} atualizada com sucesso!`);
@@ -76,13 +77,44 @@ export function useEditTransactionController({ transaction, onClose }: Props) {
     }
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: async () => await transactionService.delete(transaction!.id)
+  });
+
+  async function handleDelete() {
+    try {
+      await deleteMutation.mutateAsync();
+      queryClient.invalidateQueries(['transactions']);
+      queryClient.invalidateQueries(['bank-accounts']);
+      toast.success('Transação excluída com sucesso!');
+      handleCloseDeleteModal();
+      onClose();
+    } catch (error) {
+      console.error(error);
+      toast.error('Ocorreu um erro com a exclusão a transação');
+    }
+  }
+
+  function handleOpenDeleteModal() {
+    setIsDeletingTransactionModalOpen(true);
+  }
+
+  function handleCloseDeleteModal() {
+    setIsDeletingTransactionModalOpen(false);
+  }
+
   return {
-    isLoading,
+    isLoading: updateMutation.isLoading,
     errors,
     register,
     control,
     handleSubmit,
     categories,
     accounts,
+    isDeleteTransactionModalOpen,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    handleDelete,
+    isDeleting: deleteMutation.isLoading
   };
 }

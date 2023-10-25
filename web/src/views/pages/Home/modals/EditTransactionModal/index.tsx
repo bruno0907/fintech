@@ -8,6 +8,8 @@ import { Modal } from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
 import { useEditTransactionController } from './useEditTransactionController';
 import { Transaction } from '../../../../../app/types/Transaction';
+import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal';
+import { TrashIcon } from '@radix-ui/react-icons';
 
 interface EditTransactionModalProps {
   transaction: null | Transaction,
@@ -16,9 +18,6 @@ interface EditTransactionModalProps {
 }
 
 export function EditTransactionModal({ transaction, onClose, isOpen }: EditTransactionModalProps) {
-
-  if(!transaction) return;
-
   const {
     handleSubmit,
     isLoading,
@@ -27,16 +26,38 @@ export function EditTransactionModal({ transaction, onClose, isOpen }: EditTrans
     register,
     accounts,
     categories,
+    isDeleteTransactionModalOpen,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    handleDelete,
+    isDeleting
   } = useEditTransactionController({ transaction, onClose });
 
-  const isOutcome = transaction?.type === 'OUTCOME';
+  if(isDeleteTransactionModalOpen) {
+    return (
+      <ConfirmDeleteModal
+        onClose={handleCloseDeleteModal}
+        title="Tem certeza que deseja excluir esta conta?"
+        description="Ao excluir a conta, também serão excluídos todos os registros de receitas e despesas relacionados."
+        onConfirm={handleDelete}
+        onCancel={handleCloseDeleteModal}
+        isDeleting={isDeleting}
+      />
+    );
+  }
 
+  const isOutcome = transaction?.type === 'OUTCOME';
 
   return (
     <Modal
       title={isOutcome ? 'Editar Despesa' : 'Editar Receita'}
       open={isOpen}
       onClose={onClose}
+      rightAction={(
+        <button onClick={handleOpenDeleteModal}>
+          <TrashIcon className='text-red-900 h-6 w-6' />
+        </button>
+      )}
     >
       <form className='space-y-10' onSubmit={handleSubmit}>
         <fieldset>
