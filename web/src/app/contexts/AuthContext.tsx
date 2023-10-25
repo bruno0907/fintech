@@ -1,15 +1,16 @@
 import { createContext, ReactNode, useCallback, useEffect, useState } from 'react';
 import { localStorageKeys } from '../config/localStorageKeys';
-import { MeServiceResponse, userService } from '../../services/user/userService';
+import { userService } from '../../services/user/userService';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { SplashScreen } from '../../views/components/SplashScreen';
+import { User } from '../types/User';
 
 interface AuthContextValue {
   signedIn: boolean;
+  user: User | undefined;
   handleSignIn: (accessToken: string) => void;
   handleSignOut: () => void;
-  data: MeServiceResponse | undefined
 }
 
 interface AuthProviderValue {
@@ -53,7 +54,7 @@ export function AuthProvider({ children }: AuthProviderValue) {
       signedIn: isSuccess && signedIn,
       handleSignIn,
       handleSignOut,
-      data
+      user: data
     }}>
       <SplashScreen isLoading={isFetching} />
       {!isFetching && children}

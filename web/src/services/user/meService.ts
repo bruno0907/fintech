@@ -1,9 +1,7 @@
+import { User } from '../../app/types/User';
 import { httpClientService } from '../httpClientService';
 
-export interface MeServiceResponse {
-  name: string;
-  email: string;
-}
+export type MeServiceResponse = User;
 
 export class MeService {
   constructor(private readonly httpClient = httpClientService) {}

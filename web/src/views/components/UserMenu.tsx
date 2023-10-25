@@ -5,20 +5,16 @@ import { DropdownMenu } from './DropdownMenu';
 import * as Avatar from '@radix-ui/react-avatar';
 
 export function UserMenu() {
-  const { data, handleSignOut } = useAuth();
+  const { user, handleSignOut } = useAuth();
 
-  if(!data) return;
-
-  const fullName = data.name.split(' ');
-  const firstName = fullName[0];
-  const lastName = fullName[fullName.length - 1];
+  if(!user) return;
 
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
         <Avatar.Root className="w-12 h-12 flex items-center justify-center bg-teal-0 rounded-full cursor-pointer">
           <Avatar.Fallback className="text-teal-900 font-medium text-sm tracking-[-0.5px]">
-            {firstName[0]}{lastName[0]}
+            {user.name.slice(0, 2).toUpperCase()}
           </Avatar.Fallback>
         </Avatar.Root>
       </DropdownMenu.Trigger>
