@@ -6,12 +6,14 @@ import { ValidateBankAccountOwnershipService } from '../../bank-accounts/service
 import { ValidateCategoryOwnershipService } from '../../categories/services/validate-category-ownership.service';
 import { ValidateTransactionOwnershipService } from './validate-transaction-ownership.service';
 import { Transaction } from '../entitites/Transaction';
+import { Prisma } from '@prisma/client';
 
 interface TransactionFilterInput {
   month?: number;
   year?: number;
   bankAccountId?: string;
   type?: Transaction;
+  orderBy: Prisma.SortOrder;
 }
 
 @Injectable()
@@ -61,6 +63,9 @@ export class TransactionsService {
             icon: true,
           },
         },
+      },
+      orderBy: {
+        date: filters.orderBy ?? 'asc',
       },
     });
   }

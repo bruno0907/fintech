@@ -19,6 +19,7 @@ import { ActiveUserId } from 'src/shared/decorators/ActiveUserId';
 import { ParseOptionalUUIDPipe } from 'src/shared/pipes/ParseOptionalUUIDPipe';
 import { Transaction } from './entitites/Transaction';
 import { ParseOptionalEnumPipe } from 'src/shared/pipes/ParseOptionalEnumPipe';
+import { Prisma } from '@prisma/client';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -39,12 +40,15 @@ export class TransactionsController {
     @Query('year', ParseIntPipe) year: number,
     @Query('bankAccountId', ParseOptionalUUIDPipe) bankAccountId?: string,
     @Query('type', new ParseOptionalEnumPipe(Transaction)) type?: Transaction,
+    @Query('orderBy', new ParseOptionalEnumPipe(Prisma.SortOrder))
+    orderBy?: Prisma.SortOrder,
   ) {
     return this.transactionsService.findAllByUserId(userId, {
       month,
       year,
       bankAccountId,
       type,
+      orderBy,
     });
   }
 
